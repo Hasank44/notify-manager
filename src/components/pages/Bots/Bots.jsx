@@ -1,0 +1,219 @@
+import { useEffect, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
+import { Lock, Plus } from "lucide-react";
+import { toast } from "sonner";
+import { useEntity } from "@/hooks/useEntity";
+import entities from "@/redux/entities";
+import PageHeader from "../../shared/PageHeader";
+import Pagination from "../../shared/Pagination";
+import ConfirmModal from "../../shared/ConfirmModal";
+import BotTable from "./BotTable";
+import BotForm from "./BotForm";
+import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from "@/utils/constants";
+
+const ACTIVE_FILTERS = [
+    { value: "", label: "Any status" },
+    { value: "true", label: "Active only" },
+    { value: "false", label: "Inactive only" },
+];
+
+const Bots = () => {
+    const user = useSelector((state) => state.user.user);
+    const pkg = user?.packageId ?? user?.package ?? null;
+    const allowOwnBot = pkg?.allowOwnBot === true;
+
+    const bots = useEntity(entities.bots);
+
+    const [page, setPage] = useState(1);
+    const [limit, setLimit] = useState(DEFAULT_PAGE_SIZE);
+    const [activeFilter, setActiveFilter] = useState("");
+
+    const [formOpen, setFormOpen] = useState(false);
+    const [editTarget, setEditTarget] = useState(null);
+    const [deleteTarget, setDeleteTarget] = useState(null);
+    const [saving, setSaving] = useState(false);
+
+    const queryParams = useMemo(() => {
+        const params = { page, limit };
+        if (activeFilter === "true") params.active = true;
+        if (activeFilter === "false") params.active = false;
+        return params;
+    }, [page, limit, activeFilter]);
+
+    /* Cache-aware fetch */
+    useEffect(() => {
+        if (!allowOwnBot) return;
+        bots.fetchAll(queryParams).catch(() => { });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [page, limit, activeFilter, allowOwnBot]);
+
+    const handleRefresh = () => {
+        bots
+            .refresh(queryParams)
+            .then(() => toast.success("Bots refreshed"))
+            .catch(() => { });
+    };
+
+    const openCreate = () => {
+        setEditTarget(null);
+        setFormOpen(true);
+    };
+
+    const openEdit = (bot) => {
+        setEditTarget(bot);
+        setFormOpen(true);
+    };
+
+    const handleSubmit = async (payload) => {
+        setSaving(true);
+        try {
+            if (editTarget) {
+                await bots.update(editTarget.id, payload);
+                toast.success("Bot updated — may require re-approval");
+            } else {
+                await bots.create(payload);
+                toast.success("Bot submitted for approval");
+            }
+            setFormOpen(false);
+            setEditTarget(null);
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    const handleDelete = async () => {
+        if (!deleteTarget) return;
+        setSaving(true);
+        try {
+            await bots.remove(deleteTarget.id);
+            toast.success("Bot deleted");
+            setDeleteTarget(null);
+        } catch {
+            /* interceptor toasts */
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    /* Feature gate — show locked state if package doesn't allow own bot */
+    if (!allowOwnBot) {
+        return (
+            <div className="space-y-3">
+                <PageHeader title="Telegram Bots" />
+                <div className="card">
+                    <div className="flex flex-col items-center justify-center py-12 text-center">
+                        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-500/10 text-amber-400">
+                            <Lock size={24} />
+                        </div>
+                        <h3 className="text-lg font-semibold text-gray-100">
+                            Own Bot Not Available
+                        </h3>
+                        <p className="mt-1 max-w-md text-sm text-muted">
+                            Your current plan ({pkg?.label ?? pkg?.name ?? "Free"}) does not
+                            support adding your own Telegram bots. Upgrade to Pro or higher
+                            to use your own bot for notifications.
+                        </p>
+                        <a
+                            href="/packages"
+                            className="btn-primary btn-sm mt-4"
+                        >
+                            View Plans
+                        </a>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="space-y-3">
+            <PageHeader
+                title="Telegram Bots"
+                onRefresh={handleRefresh}
+                refreshing={bots.loading}
+                actions={
+                    <button
+                        type="button"
+                        onClick={openCreate}
+                        className="btn-primary btn-sm"
+                    >
+                        <Plus size={14} />
+                        <span className="hidden sm:inline">Add Bot</span>
+                    </button>
+                }
+            />
+
+            <div className="card">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+                    <div className="flex-1 text-sm text-muted">
+                        {bots.pagination.total} bot
+                        {bots.pagination.total === 1 ? "" : "s"} registered
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <select
+                            value={activeFilter}
+                            onChange={(e) => {
+                                setActiveFilter(e.target.value);
+                                setPage(1);
+                            }}
+                            className="select w-40"
+                        >
+                            {ACTIVE_FILTERS.map((f) => (
+                                <option key={f.value} value={f.value}>
+                                    {f.label}
+                                </option>
+                            ))}
+                        </select>
+                        <select
+                            value={limit}
+                            onChange={(e) => setLimit(Number(e.target.value))}
+                            className="select w-24"
+                        >
+                            {PAGE_SIZES.map((size) => (
+                                <option key={size} value={size}>
+                                    {size}/page
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <BotTable
+                    items={bots.items}
+                    loading={bots.loading}
+                    onEdit={openEdit}
+                    onDelete={setDeleteTarget}
+                />
+                <Pagination
+                    page={bots.pagination.page}
+                    limit={bots.pagination.limit}
+                    total={bots.pagination.total}
+                    onPageChange={setPage}
+                />
+            </div>
+            <BotForm
+                open={formOpen}
+                bot={editTarget}
+                saving={saving}
+                onClose={() => {
+                    setFormOpen(false);
+                    setEditTarget(null);
+                }}
+                onSubmit={handleSubmit}
+            />
+            <ConfirmModal
+                open={!!deleteTarget}
+                title="Delete bot?"
+                description={`This will permanently remove "${deleteTarget?.name}". Deletion is blocked if any destinations reference this bot.`}
+                confirmText="Delete"
+                variant="danger"
+                loading={saving}
+                onConfirm={handleDelete}
+                onCancel={() => setDeleteTarget(null)}
+            />
+        </div>
+    );
+};
+
+export default Bots;

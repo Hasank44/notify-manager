@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /docs/
+Allow: /docs/*
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+Disallow: /login
+Disallow: /register
+Disallow: /
+
+Sitemap: https://app.iftyhasan.com/sitemap.xml
