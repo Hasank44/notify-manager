@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { BookOpen, Compass, Globe,  Key, Server, Shield, Terminal, AlertTriangle, Gauge, Wrench, HelpCircle } from "lucide-react";
+import { Compass, Globe, Key, Server, Shield } from "lucide-react";
 
 const NAV = [
     {
@@ -49,7 +49,7 @@ const NAV = [
 
 const DocsSidebar = ({ onLinkClick }) => {
     return (
-        <nav className="flex flex-col gap-3 p-3 pb-20">
+        <nav className="flex flex-col gap-3 pl-2 p-3 pb-20">
             {NAV.map((section) => {
                 const Icon = section.icon;
                 return (
@@ -72,7 +72,7 @@ const DocsSidebar = ({ onLinkClick }) => {
                                         }`
                                     }
                                 >
-                                    {item.label}
+                                    {item?.label}
                                 </NavLink>
                             ))}
                         </div>

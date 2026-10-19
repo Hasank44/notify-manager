@@ -6,6 +6,8 @@ import userSubscriptions from "./slices/userSubscriptionsSlice";
 import notifications from "./slices/notificationsSlice";
 import packages from "./slices/packagesSlice";
 import notificationTypes from "./slices/notificationTypesSlice";
+import { resetDashboard } from "./dashboardSlice";
+import { resetRecentNotifications } from "./slices/recentNotificationSlice";
 
 export const entities = {
     domains,
@@ -22,6 +24,8 @@ export const resetAllEntities = (dispatch) => {
     Object.values(entities).forEach((entity) => {
         dispatch(entity.actions.reset());
     });
+    dispatch(resetDashboard());
+    dispatch(resetRecentNotifications());
 };
 
 export default entities;

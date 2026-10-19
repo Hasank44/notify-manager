@@ -1,16 +1,3 @@
-/* ─────────────────────────────────────────────────────────────
- * Custom storage engine for redux-persist.
- *
- * Why custom?
- *   `redux-persist/lib/storage` sometimes resolves incorrectly
- *   under Vite (returns the module object instead of the storage
- *   engine). This custom implementation talks directly to
- *   `window.localStorage` and works everywhere — Vite, Next.js,
- *   SSR, tests.
- *
- * API: { getItem, setItem, removeItem } → all return Promises.
- * ───────────────────────────────────────────────────────────── */
-
 const noopStorage = {
     getItem: () => Promise.resolve(null),
     setItem: () => Promise.resolve(),
@@ -21,7 +8,6 @@ const createLocalStorage = () => {
     if (typeof window === "undefined" || !window.localStorage) {
         return noopStorage;
     }
-
     return {
         getItem: (key) => {
             try {

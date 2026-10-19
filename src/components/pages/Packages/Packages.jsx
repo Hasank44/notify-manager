@@ -16,9 +16,7 @@ const Packages = () => {
     const [refreshing, setRefreshing] = useState(false);
     const [upgradeTarget, setUpgradeTarget] = useState(null);
     const [submitting, setSubmitting] = useState(false);
-
-    const currentPkgId =
-        user?.packageId?._id ?? user?.packageId?.id ?? user?.packageId ?? null;
+    const currentPkgId = user?.packageId?._id ?? user?.packageId?.id ?? user?.packageId ?? null;
 
     const load = useCallback(async (showSpinner = false) => {
         if (showSpinner) setRefreshing(true);
@@ -56,14 +54,12 @@ const Packages = () => {
     };
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-3">
             <PageHeader
                 title="Packages"
                 onRefresh={handleRefresh}
                 refreshing={refreshing}
             />
-
-            {/* Info banner */}
             <div className="flex items-start gap-2 rounded-lg border border-indigo-500/20 bg-indigo-500/5 p-3 text-xs">
                 <PackageIcon
                     size={14}
@@ -76,7 +72,6 @@ const Packages = () => {
             </div>
 
             {loading && <Loader full />}
-
             {!loading && packages.length === 0 && (
                 <div className="card text-center text-sm text-muted">
                     No packages available right now.
@@ -84,7 +79,7 @@ const Packages = () => {
             )}
 
             {!loading && packages.length > 0 && (
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
                     {packages.map((pkg) => {
                         const isCurrent = String(pkg.id) === String(currentPkgId);
                         const isHighlighted = pkg.highlighted === true;
@@ -104,7 +99,7 @@ const Packages = () => {
                                     </div>
                                 )}
 
-                                <div className="mb-4">
+                                <div className="mb-3">
                                     <h3 className="text-lg font-semibold text-gray-100">
                                         {pkg.label}
                                     </h3>
@@ -113,7 +108,7 @@ const Packages = () => {
                                     </p>
                                 </div>
 
-                                <div className="mb-4">
+                                <div className="mb-3">
                                     <div className="flex items-baseline gap-1">
                                         <span className="text-3xl font-bold text-white">
                                             {pkg.currency === "USD" ? "$" : pkg.currency}{" "}
@@ -125,7 +120,7 @@ const Packages = () => {
                                     </div>
                                 </div>
 
-                                <div className="mb-4 space-y-1.5 text-sm">
+                                <div className="mb-3 space-y-1.5 text-sm">
                                     <div className="flex items-center justify-between text-xs">
                                         <span className="text-white/60">Domains</span>
                                         <span className="font-medium text-gray-100">
@@ -175,7 +170,7 @@ const Packages = () => {
                                 </div>
 
                                 {pkg.features?.length > 0 && (
-                                    <div className="mb-4 flex-1 space-y-1.5 border-t border-white/5 pt-3">
+                                    <div className="mb-3 flex-1 space-y-1.5 border-t border-white/5 pt-3">
                                         {pkg.features.slice(0, 5).map((f, i) => (
                                             <div
                                                 key={i}
@@ -212,7 +207,6 @@ const Packages = () => {
                     })}
                 </div>
             )}
-
             <UpgradeModal
                 open={!!upgradeTarget}
                 pkg={upgradeTarget}

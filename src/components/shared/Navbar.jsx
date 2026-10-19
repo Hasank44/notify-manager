@@ -1,14 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import {
-    Bell,
-    ChevronDown,
-    LogOut,
-    Menu,
-    User as UserIcon,
-    X,
-} from "lucide-react";
+import { Bell, ChevronDown, LogOut, Menu, User as UserIcon, X } from "lucide-react";
 import { toast } from "sonner";
 import axiosInstance, { authStorage } from "@/api/axiosInstance";
 import { setUser } from "@/redux/userSlice";
@@ -101,7 +94,6 @@ const Navbar = () => {
         <>
             <nav className="sticky left-0 top-0 z-30 w-full border-b border-white/10 bg-[#0B1220]/90 shadow-lg backdrop-blur-xl">
                 <div className="flex h-14 items-center justify-between gap-2 px-3 md:px-5">
-                    {/* Left: menu + logo */}
                     <div className="flex min-w-0 items-center gap-2">
                         {user && (
                             <button
@@ -113,18 +105,16 @@ const Navbar = () => {
                                 {sidebarOpen ? <X size={18} /> : <Menu size={18} />}
                             </button>
                         )}
-
                         <div className="flex min-w-0 items-center gap-2">
-                            <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 shadow-lg shadow-indigo-500/20">
+                            {/* <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 shadow-lg shadow-indigo-500/20">
                                 <Bell size={16} className="text-white" />
-                            </div>
+                            </div> */}
+                            <img src={'/notification-manager.webp'} className="h-8 w-auto rounded-full" alt="logo" />
                             <span className="hidden truncate bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400 bg-clip-text text-sm font-semibold text-transparent sm:inline md:text-base">
                                 Notify Manager
                             </span>
                         </div>
                     </div>
-
-                    {/* Center: package badge */}
                     {user && pkg && (
                         <div className="hidden items-center gap-2 md:flex">
                             <span className="rounded-full border border-indigo-500/30 bg-indigo-500/15 px-2.5 py-0.5 text-[11px] font-medium text-indigo-300">
@@ -132,8 +122,6 @@ const Navbar = () => {
                             </span>
                         </div>
                     )}
-
-                    {/* Right: profile dropdown */}
                     <div ref={profileRef} className="relative">
                         <button
                             type="button"
@@ -153,7 +141,6 @@ const Navbar = () => {
                                     }`}
                             />
                         </button>
-
                         {profileOpen && (
                             <div className="absolute right-0 top-12 z-[60] w-56 animate-fade-in overflow-hidden rounded-lg border border-white/10 bg-[#0B1220] p-1.5 shadow-2xl backdrop-blur-xl">
                                 {user ? (
@@ -166,7 +153,6 @@ const Navbar = () => {
                                                 {user.email}
                                             </p>
                                         </div>
-
                                         <button
                                             type="button"
                                             onClick={handleProfile}
@@ -175,7 +161,6 @@ const Navbar = () => {
                                             <UserIcon size={14} />
                                             View Profile
                                         </button>
-
                                         <button
                                             type="button"
                                             onClick={handleLogout}
@@ -203,7 +188,6 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
-
             {user && (
                 <Sidebar
                     isOpen={sidebarOpen}

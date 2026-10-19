@@ -37,7 +37,7 @@ const PendingApprovals = () => {
 
     return (
         <div className="card h-full">
-            <div className="mb-4 flex items-center justify-between">
+            <div className="mb-3 flex items-center justify-between">
                 <div>
                     <h2 className="text-base font-semibold text-gray-100">
                         Pending Approvals

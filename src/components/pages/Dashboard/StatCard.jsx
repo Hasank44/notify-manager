@@ -1,5 +1,3 @@
-/* Same structure as admin's StatCard — copy of admin version */
-
 const VARIANTS = {
     default: {
         iconBg: "bg-indigo-500/10",
@@ -28,24 +26,12 @@ const VARIANTS = {
     },
 };
 
-const StatCard = ({
-    icon: Icon,
-    label,
-    value,
-    subtitle = "",
-    variant = "default",
-    loading = false,
-    onClick = null,
-}) => {
+const StatCard = ({ icon: Icon, label, value, subtitle = "", variant = "default", loading = false, onClick = null }) => {
     const config = VARIANTS[variant] ?? VARIANTS.default;
     const Component = onClick ? "button" : "div";
 
-    const displayValue =
-        value === null || value === undefined
-            ? "—"
-            : typeof value === "number"
-                ? value.toLocaleString()
-                : value;
+    const displayValue = value === null || value === undefined ? "—" : typeof value === "number"
+                ? value.toLocaleString() : value;
 
     return (
         <Component

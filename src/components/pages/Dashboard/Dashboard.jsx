@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router";
 import { AlertTriangle, Bell, CheckCircle, Globe, RefreshCw, Send, Bot, GitBranch, Users } from "lucide-react";
 import { toast } from "sonner";
@@ -9,6 +9,8 @@ import StatCard from "./StatCard";
 import PackageCard from "./PackageCard";
 import RecentNotifications from "./RecentNotifications";
 import PendingApprovals from "./PendingApprovals";
+import { setDomainCount, setSummary } from "../../../redux/dashboardSlice";
+import { setRecentNotification } from "../../../redux/slices/recentNotificationSlice";
 
 const QUICK_ACTIONS = [
     { to: "/domains", label: "Add Domain", emoji: <Globe /> },
@@ -17,31 +19,26 @@ const QUICK_ACTIONS = [
     { to: "/user-subscriptions", label: "Add Customer", emoji: <Users /> },
 ];
 
-const greeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return "Good morning";
-    if (hour < 18) return "Good afternoon";
-    return "Good evening";
-};
-
 const Dashboard = () => {
+    const dispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
-
-    const [summary, setSummary] = useState(null);
-    const [domainCount, setDomainCount] = useState(0);
-    const [loading, setLoading] = useState(true);
+    const { summary, domainCount } = useSelector(state => state.dashboard);
+    const { items } = useSelector(state => state.recentNotification);
+    const [loading, setLoading] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
 
     const load = useCallback(async (showSpinner = false) => {
         if (showSpinner) setRefreshing(true);
-
         try {
-            const [summaryRes, domainsRes] = await Promise.all([
+            setLoading(true);
+            const [summaryRes, domainsRes, recentNotify] = await Promise.all([
                 axiosInstance.get(ENDPOINTS.dashboard),
                 axiosInstance.get(ENDPOINTS.domains.list, { params: { limit: 100 } }),
+                axiosInstance.get(ENDPOINTS.notifications.list, { params: { limit: 5 } }),
             ]);
-            setSummary(summaryRes?.data ?? null);
-            setDomainCount(domainsRes?.data?.items?.length ?? 0);
+            dispatch(setSummary(summaryRes?.data ?? null));
+            dispatch(setDomainCount(domainsRes?.data?.items?.length ?? 0));
+            dispatch(setRecentNotification(recentNotify?.data?.items ?? []));
         } catch {
             /* interceptor toasts */
         } finally {
@@ -51,15 +48,16 @@ const Dashboard = () => {
     }, []);
 
     useEffect(() => {
+        if (summary !== null || domainCount > 0 || items?.length > 0) {
+            return;
+        }
         load();
-    }, [load]);
+    }, [load, summary, domainCount]);
 
     const handleRefresh = () => {
         load(true);
         toast.info("Refreshing dashboard…");
     };
-
-    const firstName = user?.name?.split(" ")[0] || user?.username || "there";
 
     return (
         <div className="space-y-3">
@@ -115,7 +113,7 @@ const Dashboard = () => {
             </div>
             <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
                 <div className="lg:col-span-2">
-                    <RecentNotifications />
+                    <RecentNotifications loading={loading} />
                 </div>
                 <div className="lg:col-span-1">
                     <PendingApprovals />

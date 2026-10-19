@@ -3,6 +3,8 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "./storage";
 import userReducer from "./userSlice";
 
+import dashboardSlice from './dashboardSlice';
+import recentNotificationReducer from "./slices/recentNotificationSlice";
 import { domainsReducer } from "./slices/domainsSlice";
 import { botsReducer } from "./slices/botsSlice";
 import { destinationsReducer } from "./slices/destinationsSlice";
@@ -23,6 +25,7 @@ const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
 
 const store = configureStore({
     reducer: {
+        dashboard: dashboardSlice,
         user: persistedUserReducer,
         domains: domainsReducer,
         bots: botsReducer,
@@ -32,6 +35,7 @@ const store = configureStore({
         notifications: notificationsReducer,
         packages: packagesReducer,
         notificationTypes: notificationTypesReducer,
+        recentNotification: recentNotificationReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

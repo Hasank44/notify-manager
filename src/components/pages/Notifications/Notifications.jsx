@@ -208,70 +208,63 @@ const Notifications = () => {
                 onRefresh={handleRefresh}
                 refreshing={notifications.loading}
             />
-
-            <div className="card space-y-2">
-                <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
-                    <div className="flex-1">
-                        <SearchBar
-                            value={search}
-                            onChange={setSearch}
-                            placeholder="Search request ID, domain, type…"
-                        />
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <input
-                            type="text"
-                            value={domain}
-                            onChange={(e) => setDomain(e.target.value)}
-                            placeholder="domain.com"
-                            className="input w-40"
-                        />
-                        <select
-                            value={typeFilter}
-                            onChange={(e) => setTypeFilter(e.target.value)}
-                            className="select w-36"
-                        >
-                            <option value="">All types</option>
-                            {typeList.map((t) => (
-                                <option key={t.id} value={t.name}>
-                                    {t.label}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
+            <div className="card space-y-3">
+                <div className="grid grid-cols-1 gap-2 md:grid-cols-[minmax(0,1fr)_10rem_9rem]">
+                    <SearchBar
+                        value={search}
+                        onChange={setSearch}
+                        placeholder="Search request ID, domain, type…"
+                    />
+                    <input
+                        type="text"
+                        value={domain}
+                        onChange={(e) => setDomain(e.target.value)}
+                        placeholder="domain.com"
+                        className="input w-full"
+                    />
+                    <select
+                        value={typeFilter}
+                        onChange={(e) => setTypeFilter(e.target.value)}
+                        className="select w-full"
+                    >
+                        <option value="">All types</option>
+                        {typeList.map((t) => (
+                            <option key={t.id} value={t.name}>
+                                {t.label}
+                            </option>
+                        ))}
+                    </select>
                 </div>
-
-                <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-                    <div className="flex flex-1 items-center gap-2">
-                        <select
-                            value={statusFilter}
-                            onChange={(e) => setStatusFilter(e.target.value)}
-                            className="select w-36"
-                        >
-                            {STATUS_FILTERS.map((f) => (
-                                <option key={f.value} value={f.value}>
-                                    {f.label}
-                                </option>
-                            ))}
-                        </select>
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-[9rem_minmax(0,1fr)_auto] lg:items-center">
+                    <select
+                        value={statusFilter}
+                        onChange={(e) => setStatusFilter(e.target.value)}
+                        className="select w-full"
+                    >
+                        {STATUS_FILTERS.map((f) => (
+                            <option key={f.value} value={f.value}>
+                                {f.label}
+                            </option>
+                        ))}
+                    </select>
+                    <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2">
                         <input
                             type="date"
                             value={since}
                             onChange={(e) => setSince(e.target.value)}
-                            className="input w-40"
-                            placeholder="From"
+                            className="input min-w-0 w-full"
                         />
-                        <span className="text-xs text-muted">to</span>
+                        <span className="shrink-0 text-center text-xs text-muted">
+                            to
+                        </span>
                         <input
                             type="date"
                             value={until}
                             onChange={(e) => setUntil(e.target.value)}
-                            className="input w-40"
-                            placeholder="To"
+                            className="input min-w-0 w-full"
                         />
                     </div>
-
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-end gap-2 sm:col-span-2 lg:col-span-1">
                         {hasFilters && (
                             <button
                                 type="button"
@@ -295,28 +288,27 @@ const Notifications = () => {
                     </div>
                 </div>
             </div>
-
-            <DataTable
-                columns={columns}
-                data={notifications.items}
-                loading={notifications.loading}
-                rowKey={(r) => r.id}
-                emptyState={
-                    <EmptyState
-                        icon={Bell}
-                        title="No notifications yet"
-                        description="Notifications sent to your domains will appear here."
-                    />
-                }
-            />
-
-            <Pagination
-                page={notifications.pagination.page}
-                limit={notifications.pagination.limit}
-                total={notifications.pagination.total}
-                onPageChange={setPage}
-            />
-
+            <div>
+                <DataTable
+                    columns={columns}
+                    data={notifications.items}
+                    loading={notifications.loading}
+                    rowKey={(r) => r.id}
+                    emptyState={
+                        <EmptyState
+                            icon={Bell}
+                            title="No notifications yet"
+                            description="Notifications sent to your domains will appear here."
+                        />
+                    }
+                />
+                <Pagination
+                    page={notifications.pagination.page}
+                    limit={notifications.pagination.limit}
+                    total={notifications.pagination.total}
+                    onPageChange={setPage}
+                />
+            </div>
             <NotificationDetails
                 open={detailOpen}
                 notification={selected}

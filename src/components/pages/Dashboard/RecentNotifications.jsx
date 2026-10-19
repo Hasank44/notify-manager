@@ -1,40 +1,16 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { ArrowRight, Bell } from "lucide-react";
-import axiosInstance from "@/api/axiosInstance";
-import ENDPOINTS from "@/api/endpoints";
 import StatusBadge from "../../shared/StatusBadge";
 import EmptyState from "../../shared/EmptyState";
 import Loader from "../../shared/Loader";
 import { formatRelative } from "@/utils/formatDate";
+import { useSelector } from "react-redux";
 
-const RecentNotifications = () => {
-    const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        let cancelled = false;
-        const load = async () => {
-            try {
-                const response = await axiosInstance.get(ENDPOINTS.notifications.list, {
-                    params: { limit: 5 },
-                });
-                if (!cancelled) setItems(response?.data?.items ?? []);
-            } catch {
-                if (!cancelled) setItems([]);
-            } finally {
-                if (!cancelled) setLoading(false);
-            }
-        };
-        load();
-        return () => {
-            cancelled = true;
-        };
-    }, []);
-
+const RecentNotifications = ({ loading}) => {
+    const { items } = useSelector(state => state.recentNotification);
     return (
         <div className="card">
-            <div className="mb-4 flex items-center justify-between">
+            <div className="mb-3 flex items-center justify-between">
                 <div>
                     <h2 className="text-base font-semibold text-gray-100">
                         Recent Notifications
@@ -48,9 +24,7 @@ const RecentNotifications = () => {
                     View All <ArrowRight size={12} />
                 </Link>
             </div>
-
             {loading && <Loader />}
-
             {!loading && items.length === 0 && (
                 <EmptyState
                     icon={Bell}
@@ -58,8 +32,7 @@ const RecentNotifications = () => {
                     description="When notifications are sent to your domains, they'll appear here."
                 />
             )}
-
-            {!loading && items.length > 0 && (
+            {!loading && items?.length > 0 && (
                 <div className="overflow-x-auto">
                     <table className="table min-w-[500px]">
                         <thead>
@@ -72,7 +45,7 @@ const RecentNotifications = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {items.map((n) => (
+                            {items?.map((n) => (
                                 <tr key={n.id}>
                                     <td>
                                         <code className="rounded bg-white/5 px-1.5 py-0.5 text-[11px] text-indigo-300">

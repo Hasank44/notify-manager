@@ -46,18 +46,18 @@ const Breadcrumbs = () => {
                     </Link>
                 </li>
                 {crumbs.slice(1).map((crumb) => (
-                    <li key={crumb.path} className="flex items-center gap-1.5">
+                    <li key={crumb?.path} className="flex items-center gap-1.5">
                         <ChevronRight size={11} className="text-white/30" />
                         {crumb.isLast ? (
                             <span className="text-white/80" aria-current="page">
-                                {crumb.label}
+                                {crumb?.label}
                             </span>
                         ) : (
                             <Link
-                                to={crumb.path}
+                                to={crumb?.path}
                                 className="transition hover:text-white"
                             >
-                                {crumb.label}
+                                {crumb?.label}
                             </Link>
                         )}
                     </li>

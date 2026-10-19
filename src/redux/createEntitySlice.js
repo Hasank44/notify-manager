@@ -1,20 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "@/api/axiosInstance";
 
-/* ─────────────────────────────────────────────────────────────
- * createEntitySlice — reusable slice factory for any API resource.
- *
- * Features:
- *   - items[] + pagination
- *   - loading + loaded + error
- *   - filters (current query params)
- *   - lastFetchedAt (for TTL-based cache)
- *   - detailCache (per-id)
- *   - Standard thunks: fetchAll, fetchById, create, update, remove
- *   - Standard actions: setFilters, invalidate, reset, clearError, clearDetail
- *   - Mutations auto-invalidate cache so the next read re-fetches
- * ───────────────────────────────────────────────────────────── */
-
 export const createEntitySlice = ({ name, endpoint, extraReducers = null }) => {
     const initialState = {
         items: [],
@@ -30,7 +16,6 @@ export const createEntitySlice = ({ name, endpoint, extraReducers = null }) => {
         detailCache: {},
     };
 
-    /* ─── Thunks ─────────────────────────────────────────────── */
     const fetchAll = createAsyncThunk(
         `${name}/fetchAll`,
         async (params = {}, { rejectWithValue }) => {
@@ -101,7 +86,6 @@ export const createEntitySlice = ({ name, endpoint, extraReducers = null }) => {
         }
     );
 
-    /* ─── Slice ─────────────────────────────────────────────── */
     const slice = createSlice({
         name,
         initialState,
@@ -122,7 +106,6 @@ export const createEntitySlice = ({ name, endpoint, extraReducers = null }) => {
             reset: () => initialState,
         },
         extraReducers: (builder) => {
-            /* fetchAll */
             builder.addCase(fetchAll.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -139,8 +122,6 @@ export const createEntitySlice = ({ name, endpoint, extraReducers = null }) => {
                 state.loading = false;
                 state.error = action.payload;
             });
-
-            /* fetchById */
             builder.addCase(fetchById.pending, (state) => {
                 state.detailLoading = true;
                 state.error = null;
@@ -154,8 +135,6 @@ export const createEntitySlice = ({ name, endpoint, extraReducers = null }) => {
                 state.detailLoading = false;
                 state.error = action.payload;
             });
-
-            /* create */
             builder.addCase(createItem.fulfilled, (state, action) => {
                 state.loaded = false; // force refetch next read
                 if (action.payload) {
@@ -163,8 +142,6 @@ export const createEntitySlice = ({ name, endpoint, extraReducers = null }) => {
                     state.pagination.total += 1;
                 }
             });
-
-            /* update */
             builder.addCase(updateItem.fulfilled, (state, action) => {
                 const idx = state.items.findIndex((i) => i.id === action.payload.id);
                 if (idx !== -1) state.items[idx] = action.payload;
@@ -173,8 +150,6 @@ export const createEntitySlice = ({ name, endpoint, extraReducers = null }) => {
                 }
                 delete state.detailCache[action.payload.id];
             });
-
-            /* remove */
             builder.addCase(removeItem.fulfilled, (state, action) => {
                 state.items = state.items.filter((i) => i.id !== action.payload);
                 state.pagination.total = Math.max(0, state.pagination.total - 1);
@@ -183,8 +158,6 @@ export const createEntitySlice = ({ name, endpoint, extraReducers = null }) => {
                     state.detail = null;
                 }
             });
-
-            /* caller-supplied reducers (e.g. approve/reject for approvals) */
             if (typeof extraReducers === "function") {
                 extraReducers(builder);
             }
