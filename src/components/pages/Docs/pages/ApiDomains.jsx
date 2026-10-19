@@ -40,7 +40,7 @@ const ApiDomains = () => {
 
                 <FieldTable
                     fields={[
-                        { name: "domain", type: "string", required: "required", description: "Domain without protocol (e.g., iftyhasan.com)" },
+                        { name: "domain", type: "string", required: "required", description: "Domain without protocol (e.g., your-domain.com)" },
                         { name: "name", type: "string", required: "required", description: "Display name (1-120 chars)" },
                         { name: "description", type: "string", required: "optional", description: "Optional context" },
                         { name: "active", type: "boolean", required: "optional", description: "Default: true" },
@@ -50,14 +50,14 @@ const ApiDomains = () => {
                 <CodeBlock
                     language="js"
                     title="JavaScript"
-                    code={`const response = await fetch("https://iftyhasan.com/api/v1/user/domains", {
+                    code={`const response = await fetch("https://api-notify-manage.vercel.app/api/v1/user/domains", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
     Authorization: \`Bearer \${accessToken}\`
   },
   body: JSON.stringify({
-    domain: "iftyhasan.com",
+    domain: "your-domain.com",
     name: "Hasan's Shop"
   })
 });
@@ -74,7 +74,7 @@ if (result.success) {
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/domains");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/domains");
 curl_setopt_array($ch, [
     CURLOPT_POST => true,
     CURLOPT_RETURNTRANSFER => true,
@@ -83,7 +83,7 @@ curl_setopt_array($ch, [
         "Authorization: Bearer " . $accessToken
     ],
     CURLOPT_POSTFIELDS => json_encode([
-        "domain" => "iftyhasan.com",
+        "domain" => "your-domain.com",
         "name" => "Hasan's Shop"
     ]),
 ]);
@@ -104,10 +104,10 @@ if ($result["success"]) {
                     code={`import requests
 
 response = requests.post(
-    "https://iftyhasan.com/api/v1/user/domains",
+    "https://api-notify-manage.vercel.app/api/v1/user/domains",
     headers={"Authorization": f"Bearer {access_token}"},
     json={
-        "domain": "iftyhasan.com",
+        "domain": "your-domain.com",
         "name": "Hasan's Shop",
     },
 )
@@ -126,7 +126,7 @@ if result["success"]:
   "message": "Domain submitted for approval",
   "data": {
     "id": "6ad...",
-    "domain": "iftyhasan.com",
+    "domain": "your-domain.com",
     "name": "Hasan's Shop",
     "status": "pending",
     "verified": false,
@@ -173,7 +173,7 @@ if result["success"]:
                     language="js"
                     title="JavaScript"
                     code={`const response = await fetch(
-  "https://iftyhasan.com/api/v1/user/domains?page=1&limit=20&status=approved",
+  "https://api-notify-manage.vercel.app/api/v1/user/domains?page=1&limit=20&status=approved",
   { headers: { Authorization: \`Bearer \${accessToken}\` } }
 );
 
@@ -188,7 +188,7 @@ result.data.items.forEach(domain => {
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/domains?page=1&limit=20&status=approved");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/domains?page=1&limit=20&status=approved");
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => ["Authorization: Bearer " . $accessToken],
@@ -208,7 +208,7 @@ foreach ($result["data"]["items"] as $domain) {
                     code={`import requests
 
 response = requests.get(
-    "https://iftyhasan.com/api/v1/user/domains",
+    "https://api-notify-manage.vercel.app/api/v1/user/domains",
     params={"page": 1, "limit": 20, "status": "approved"},
     headers={"Authorization": f"Bearer {access_token}"},
 )
@@ -226,7 +226,7 @@ for domain in result["data"]["items"]:
     "items": [
       {
         "id": "6ad...",
-        "domain": "iftyhasan.com",
+        "domain": "your-domain.com",
         "name": "Hasan's Shop",
         "status": "approved",
         "verified": true,
@@ -250,7 +250,7 @@ for domain in result["data"]["items"]:
                     language="js"
                     title="JavaScript — Update example"
                     code={`// Update domain (only name/description/active editable)
-await fetch(\`https://iftyhasan.com/api/v1/user/domains/\${domainId}\`, {
+await fetch(\`https://api-notify-manage.vercel.app/api/v1/user/domains/\${domainId}\`, {
   method: "PATCH",
   headers: {
     "Content-Type": "application/json",
@@ -263,7 +263,7 @@ await fetch(\`https://iftyhasan.com/api/v1/user/domains/\${domainId}\`, {
 });
 
 // Delete domain
-await fetch(\`https://iftyhasan.com/api/v1/user/domains/\${domainId}\`, {
+await fetch(\`https://api-notify-manage.vercel.app/api/v1/user/domains/\${domainId}\`, {
   method: "DELETE",
   headers: { Authorization: \`Bearer \${accessToken}\` }
 });`}

@@ -72,7 +72,7 @@ const Overview = () => {
             <div>
                 <h2 className="mb-3 text-lg font-semibold text-gray-100">Base URL</h2>
                 <div className="rounded-lg border border-white/10 bg-[#03030d] p-3">
-                    <code className="text-sm text-indigo-300">{import.meta.env.VITE_BASE_URL || 'https://api.iftyhasan.com/api/v1'}</code>
+                    <code className="text-sm text-indigo-300">{import.meta.env.VITE_BASE_URL || 'https://api-notify-manage.vercel.app/api/v1'}</code>
                 </div>
                 <p className="mt-2 text-xs text-white/40">All endpoints are relative to this URL.</p>
             </div>

@@ -50,7 +50,7 @@ const ApiBots = () => {
                 <CodeBlock
                     language="js"
                     title="JavaScript"
-                    code={`const response = await fetch("https://iftyhasan.com/api/v1/user/bots", {
+                    code={`const response = await fetch("https://api-notify-manage.vercel.app/api/v1/user/bots", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -58,7 +58,7 @@ const ApiBots = () => {
   },
   body: JSON.stringify({
     name: "Nofity Manager Gateway",
-    token: "7891234567:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw",
+    token: "789****567:AAHdqTc**********5PALDsaw",
     username: "@notifyManager_gateway_bot"
   })
 });
@@ -75,7 +75,7 @@ if (result.success) {
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/bots");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/bots");
 curl_setopt_array($ch, [
     CURLOPT_POST => true,
     CURLOPT_RETURNTRANSFER => true,
@@ -85,7 +85,7 @@ curl_setopt_array($ch, [
     ],
     CURLOPT_POSTFIELDS => json_encode([
         "name" => "Nofity Manager Gateway",
-        "token" => "7891234567:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw",
+        "token" => "789****567:AAHdqTc**********5PALDsaw",
         "username" => "@notifyManager_gateway_bot"
     ]),
 ]);
@@ -104,11 +104,11 @@ if ($result["success"]) {
                     code={`import requests
 
 response = requests.post(
-    "https://iftyhasan.com/api/v1/user/bots",
+    "https://api-notify-manage.vercel.app/api/v1/user/bots",
     headers={"Authorization": f"Bearer {access_token}"},
     json={
         "name": "Nofity Manager Gateway",
-        "token": "7891234567:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw",
+        "token": "789****567:AAHdqTc**********5PALDsaw",
         "username": "@notifyManager_gateway_bot",
     },
 )
@@ -176,7 +176,7 @@ if result["success"]:
                     language="js"
                     title="JavaScript"
                     code={`const response = await fetch(
-  "https://iftyhasan.com/api/v1/user/bots?active=true",
+  "https://api-notify-manage.vercel.app/api/v1/user/bots?active=true",
   { headers: { Authorization: \`Bearer \${accessToken}\` } }
 );
 
@@ -190,7 +190,7 @@ result.data.items.forEach(bot => {
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/bots?active=true");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/bots?active=true");
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => ["Authorization: Bearer " . $accessToken],
@@ -210,7 +210,7 @@ foreach ($result["data"]["items"] as $bot) {
                     code={`import requests
 
 response = requests.get(
-    "https://iftyhasan.com/api/v1/user/bots",
+    "https://api-notify-manage.vercel.app/api/v1/user/bots",
     params={"active": True},
     headers={"Authorization": f"Bearer {access_token}"},
 )
@@ -256,7 +256,7 @@ for bot in result["data"]["items"]:
                 <CodeBlock
                     language="js"
                     title="JavaScript — Update (name only)"
-                    code={`await fetch(\`https://iftyhasan.com/api/v1/user/bots/\${botId}\`, {
+                    code={`await fetch(\`https://api-notify-manage.vercel.app/api/v1/user/bots/\${botId}\`, {
   method: "PATCH",
   headers: {
     "Content-Type": "application/json",

@@ -213,12 +213,12 @@ RateLimit-Policy: 60;w=60`}
     const batch = items.slice(i, i + batchSize);
 
     await Promise.all(batch.map(item =>
-      fetch("https://iftyhasan.com/api/v1/notify", {
+      fetch("https://api-notify-manage.vercel.app/api/v1/notify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "custom",
-          domain: "shop.rahim.com",
+          domain: "your-domain.com",
           data: { userId: item.userId, orderId: item.orderId }
         })
       })

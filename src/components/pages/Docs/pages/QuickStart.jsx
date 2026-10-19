@@ -163,11 +163,11 @@ const QuickStart = () => {
                 <CodeBlock
                     language="curl"
                     title="cURL"
-                    code={`curl -X POST https://iftyhasan.com/api/v1/notify \\
+                        code={`curl -X POST https://api-notify-manage.vercel.app/api/v1/notify \\
   -H "Content-Type: application/json" \\
   -d '{
     "type": "custom",
-    "domain": "shop.yourname.com",
+    "domain": "your-domain.com",
     "data": {
       "message": "Hello from Notify Manager!",
       "amount": 999
@@ -186,7 +186,7 @@ const QuickStart = () => {
     "requestId": "NTF-20261018-A8F92D",
     "status": "sent",
     "type": "custom",
-    "domain": "shop.yourname.com",
+    "domain": "your-domain.com",
     "deliveryCount": 1,
     "duplicate": false
   }

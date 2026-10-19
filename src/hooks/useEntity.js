@@ -3,11 +3,8 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const CACHE_TTL_MS = 5 * 60 * 1000;
+const filtersEqual = (a, b) => JSON.stringify(a ?? {}) === JSON.stringify(b ?? {});
 
-const filtersEqual = (a, b) =>
-    JSON.stringify(a ?? {}) === JSON.stringify(b ?? {});
-
-/* Safe default state when entity/state is missing */
 const EMPTY_STATE = {
     items: [],
     pagination: { page: 1, limit: 20, total: 0, pages: 1 },
@@ -23,12 +20,9 @@ const EMPTY_STATE = {
 
 export const useEntity = (entity) => {
     const dispatch = useDispatch();
-
     const state = useSelector(
         (s) => (entity?.name ? s[entity.name] : null) ?? EMPTY_STATE
     );
-
-    /* If entity is undefined, return stub with no-op actions */
     if (!entity || !entity.name) {
         console.error(
             "[useEntity] entity is undefined. Check entities.js registry.",
@@ -48,7 +42,6 @@ export const useEntity = (entity) => {
         };
     }
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const fetchAll = useCallback(
         (params = {}, { force = false } = {}) => {
             const isFresh =
@@ -59,11 +52,9 @@ export const useEntity = (entity) => {
                 state.loaded &&
                 isFresh &&
                 filtersEqual(params, state.filters);
-
             if (canUseCache) {
                 return Promise.resolve(state.items);
             }
-
             return dispatch(entity.thunks.fetchAll(params)).unwrap();
         },
         [dispatch, entity, state.loaded, state.filters, state.lastFetchedAt, state.items]

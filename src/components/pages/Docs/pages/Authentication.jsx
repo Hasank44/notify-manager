@@ -62,14 +62,14 @@ const Authentication = () => {
                 <CodeBlock
                     language="js"
                     title="JavaScript"
-                    code={`const response = await fetch("https://iftyhasan.com/api/v1/user/auth/register", {
+                    code={`const response = await fetch("https://api-notify-manage.vercel.app/api/v1/user/auth/register", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
     name: "Md Hasan Ali",
     email: "mdhasan.sjb@gmail.com",
     phone: "01814842764",
-    username: "hasank44",
+    username: "username",
     password: "StrongPass123",
     company: "Hasan Shop",
     country: "Bangladesh"
@@ -89,7 +89,7 @@ if (result.success) {
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/auth/register");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/auth/register");
 curl_setopt_array($ch, [
     CURLOPT_POST => true,
     CURLOPT_RETURNTRANSFER => true,
@@ -98,7 +98,7 @@ curl_setopt_array($ch, [
         "name" => "Md Hasan Ali",
         "email" => "mdhasan.sjb@gmail.com",
         "phone" => "01814842764",
-        "username" => "hasank44",
+        "username" => "username",
         "password" => "StrongPass123",
         "company" => "Ifty Hasan",
         "country" => "Bangladesh"
@@ -122,12 +122,12 @@ if ($result["success"]) {
                     code={`import requests
 
 response = requests.post(
-    "https://iftyhasan.com/api/v1/user/auth/register",
+    "https://api-notify-manage.vercel.app/api/v1/user/auth/register",
     json={
         "name": "Md Hasan Ali",
         "email": "mdhasan.sjb@gmail.com",
         "phone": "01814842764",
-        "username": "hasank44",
+        "username": "username",
         "password": "StrongPass123",
         "company": "Hasan Shop",
         "country": "Bangladesh",
@@ -150,7 +150,7 @@ else:
   "requestId": "NTF-20261018-XXXX",
   "data": {
     "id": "6ad...",
-    "username": "hasank44",
+    "username": "username",
     "email": "mdhasan.sjb@gmail.com",
     "packageId": "...",
     "packageStatus": "active",
@@ -195,11 +195,11 @@ else:
                 <CodeBlock
                     language="js"
                     title="JavaScript"
-                    code={`const response = await fetch("https://iftyhasan.com/api/v1/user/auth/login", {
+                    code={`const response = await fetch("https://api-notify-manage.vercel.app/api/v1/user/auth/login", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
-    identifier: "hasank44",
+    identifier: "username",
     password: "StrongPass123"
   })
 });
@@ -218,13 +218,13 @@ if (result.success) {
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/auth/login");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/auth/login");
 curl_setopt_array($ch, [
     CURLOPT_POST => true,
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
     CURLOPT_POSTFIELDS => json_encode([
-        "identifier" => "hasank44",
+        "identifier" => "username",
         "password" => "StrongPass123"
     ]),
 ]);
@@ -246,9 +246,9 @@ if ($result["success"]) {
                     code={`import requests
 
 response = requests.post(
-    "https://iftyhasan.com/api/v1/user/auth/login",
+    "https://api-notify-manage.vercel.app/api/v1/user/auth/login",
     json={
-        "identifier": "hasank44",
+        "identifier": "username",
         "password": "StrongPass123",
     },
 )
@@ -269,7 +269,7 @@ if result["success"]:
   "data": {
     "user": {
       "id": "6ad...",
-      "username": "hasank44",
+      "username": "username",
       "email": "hasan@example.com",
       "packageId": "6ad...",
       "packageStatus": "active"
@@ -315,7 +315,7 @@ if result["success"]:
                 <CodeBlock
                     language="js"
                     title="JavaScript"
-                    code={`const response = await fetch("https://iftyhasan.com/api/v1/user/auth/refresh", {
+                    code={`const response = await fetch("https://api-notify-manage.vercel.app/api/v1/user/auth/refresh", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
@@ -335,7 +335,7 @@ if (result.success) {
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/auth/refresh");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/auth/refresh");
 curl_setopt_array($ch, [
     CURLOPT_POST => true,
     CURLOPT_RETURNTRANSFER => true,
@@ -361,7 +361,7 @@ if ($result["success"]) {
                     code={`import requests
 
 response = requests.post(
-    "https://iftyhasan.com/api/v1/user/auth/refresh",
+    "https://api-notify-manage.vercel.app/api/v1/user/auth/refresh",
     json={"refreshToken": stored_refresh_token},
 )
 
@@ -401,7 +401,7 @@ if result["success"]:
                 <CodeBlock
                     language="js"
                     title="JavaScript"
-                    code={`const response = await fetch("https://iftyhasan.com/api/v1/user/auth/me", {
+                    code={`const response = await fetch("https://api-notify-manage.vercel.app/api/v1/user/auth/me", {
   headers: {
     Authorization: \`Bearer \${localStorage.getItem("accessToken")}\`
   }
@@ -417,7 +417,7 @@ console.log("Usage:", result.data.usage.monthCount, "/", result.data.packageId.m
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/auth/me");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/auth/me");
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => [
@@ -441,7 +441,7 @@ if ($result["success"]) {
                     code={`import requests
 
 response = requests.get(
-    "https://iftyhasan.com/api/v1/user/auth/me",
+    "https://api-notify-manage.vercel.app/api/v1/user/auth/me",
     headers={"Authorization": f"Bearer {access_token}"},
 )
 
@@ -458,7 +458,7 @@ if result["success"]:
   "success": true,
   "data": {
     "id": "6ad...",
-    "username": "hasank44",
+    "username": "username",
     "name": "Md Hasan Ali",
     "email": "hasan@example.com",
     "packageId": {
@@ -491,7 +491,7 @@ if result["success"]:
                 <CodeBlock
                     language="js"
                     title="JavaScript"
-                    code={`const response = await fetch("https://iftyhasan.com/api/v1/user/auth/password", {
+                    code={`const response = await fetch("https://api-notify-manage.vercel.app/api/v1/user/auth/password", {
   method: "PATCH",
   headers: {
     "Content-Type": "application/json",
@@ -509,7 +509,7 @@ if result["success"]:
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/auth/password");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/auth/password");
 curl_setopt_array($ch, [
     CURLOPT_CUSTOMREQUEST => "PATCH",
     CURLOPT_RETURNTRANSFER => true,
@@ -534,7 +534,7 @@ $result = json_decode($response, true);`}
                     code={`import requests
 
 response = requests.patch(
-    "https://iftyhasan.com/api/v1/user/auth/password",
+    "https://api-notify-manage.vercel.app/api/v1/user/auth/password",
     headers={"Authorization": f"Bearer {access_token}"},
     json={
         "currentPassword": "OldPass123",

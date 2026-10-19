@@ -81,7 +81,6 @@ const PublicApiNotify = () => {
                 <h2 className="mb-3 text-lg font-semibold text-gray-100">
                     Three Usage Scenarios
                 </h2>
-
                 <div className="space-y-3">
                     <div className="card">
                         <h3 className="mb-2 text-sm font-semibold text-indigo-300">
@@ -95,9 +94,9 @@ const PublicApiNotify = () => {
                             title="Body"
                             code={`{
   "type": "order",
-  "domain": "shop.rahim.com",
+  "domain": "your-domain.com",
   "data": {
-    "userId": "customer-hasina",
+    "userId": "customer-name",
     "orderId": "ORD-5001",
     "amount": 2500,
     "status": "shipped"
@@ -105,7 +104,7 @@ const PublicApiNotify = () => {
 }`}
                         />
                         <p className="mt-2 text-xs text-white/40">
-                            → Goes to <code className="text-indigo-300">customer-hasina</code>'s
+                            → Goes to <code className="text-indigo-300">customer-name</code>'s
                             Telegram (must be registered via{" "}
                             <code className="text-indigo-300">/subscriptions</code> first)
                         </p>
@@ -122,7 +121,7 @@ const PublicApiNotify = () => {
                             title="Body"
                             code={`{
   "type": "announcement",
-  "domain": "shop.rahim.com",
+  "domain": "your-domain.com",
   "data": {
     "title": "New Feature Launch",
     "message": "Check out our new dashboard!"
@@ -147,7 +146,7 @@ const PublicApiNotify = () => {
                             title="Body"
                             code={`{
   "type": "error",
-  "domain": "shop.rahim.com",
+  "domain": "your-domain.com",
   "data": {
     "message": "Database connection lost",
     "severity": "critical"
@@ -162,12 +161,12 @@ const PublicApiNotify = () => {
                 </div>
             </section>
             <section>
-                <h2 className="mb-3 text-lg font-semibold text-gray-100">JavaScript Example</h2>
+                <h2 className="mb-3 text-lg font-semibold text-gray-100">Example</h2>
                 <CodeBlock
                     language="js"
                     title="JavaScript (Node.js / Browser)"
                     code={`async function sendNotification(order) {
-  const response = await fetch("https://iftyhasan.com/api/v1/notify", {
+  const response = await fetch("https://api-notify-manage.vercel.app/api/v1/notify", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -175,7 +174,7 @@ const PublicApiNotify = () => {
     },
     body: JSON.stringify({
       type: "order",
-      domain: "shop.rahim.com",
+      domain: "your-domain.com",
       data: {
         userId: order.customerExternalId,
         orderId: order.id,
@@ -201,7 +200,6 @@ const PublicApiNotify = () => {
                 />
             </section>
             <section>
-                <h2 className="mb-3 text-lg font-semibold text-gray-100">PHP Example</h2>
                 <CodeBlock
                     language="php"
                     title="PHP"
@@ -210,7 +208,7 @@ const PublicApiNotify = () => {
 function sendNotification($order) {
     $payload = [
         "type" => "order",
-        "domain" => "shop.rahim.com",
+        "domain" => "your-domain.com",
         "data" => [
             "userId" => $order["customerExternalId"],
             "orderId" => $order["id"],
@@ -219,7 +217,7 @@ function sendNotification($order) {
         ]
     ];
     
-    $ch = curl_init("https://iftyhasan.com/api/v1/notify");
+    $ch = curl_init("https://api-notify-manage.vercel.app/api/v1/notify");
     curl_setopt_array($ch, [
         CURLOPT_POST => true,
         CURLOPT_RETURNTRANSFER => true,
@@ -247,9 +245,6 @@ function sendNotification($order) {
                 />
             </section>
             <section>
-                <h2 className="mb-3 text-lg font-semibold text-gray-100">
-                    Python Example
-                </h2>
                 <CodeBlock
                     language="python"
                     title="Python"
@@ -257,14 +252,14 @@ function sendNotification($order) {
 
 def send_notification(order):
     response = requests.post(
-        "https://iftyhasan.com/api/v1/notify",
+        "https://api-notify-manage.vercel.app/api/v1/notify",
         headers={
             "Content-Type": "application/json",
             "Idempotency-Key": f"order-{order['id']}",
         },
         json={
             "type": "order",
-            "domain": "shop.rahim.com",
+            "domain": "your-domain.com",
             "data": {
                 "userId": order["customer_external_id"],
                 "orderId": order["id"],
@@ -287,8 +282,6 @@ def send_notification(order):
                 />
             </section>
             <section>
-                <h2 className="mb-3 text-lg font-semibold text-gray-100">Responses</h2>
-
                 <ResponseBlock
                     status={202}
                     description="Notification accepted and dispatched"
@@ -300,7 +293,7 @@ def send_notification(order):
     "requestId": "NTF-20261018-A8F92D",
     "status": "sent",
     "type": "order",
-    "domain": "shop.rahim.com",
+    "domain": "your-domain.com",
     "deliveryCount": 1,
     "duplicate": false
   }
@@ -414,7 +407,7 @@ def send_notification(order):
                     title="Example"
                     code={`{
   "type": "order_shipped",     // doesn't exist in DB
-  "domain": "shop.rahim.com",
+  "domain": "your-domain.com",
   "data": { "orderId": "ORD-5001" }
 }
 

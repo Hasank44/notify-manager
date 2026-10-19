@@ -48,7 +48,7 @@ const Troubleshooting = () => {
                         <CodeBlock
                             language="bash"
                             title="Check registration"
-                            code={`curl "https://iftyhasan.com/api/v1/user/user-subscriptions?search=hasina" \\
+                            code={`curl "https://api-notify-manage.vercel.app/api/v1/user/user-subscriptions?search=user" \\
   -H "Authorization: Bearer $TOKEN"`}
                         />
                         <p className="mt-2 text-xs text-white/50">
@@ -71,7 +71,7 @@ const Troubleshooting = () => {
                         <CodeBlock
                             language="bash"
                             title="Check routes for domain + type"
-                            code={`curl "https://api.iftyhasan.com/api/v1/user/routes?domainId=YOUR_ID&notificationTypeId=TYPE_ID" \\
+                            code={`curl "https://api-notify-manage.vercel.app/api/v1/user/routes?domainId=YOUR_ID&notificationTypeId=TYPE_ID" \\
   -H "Authorization: Bearer $TOKEN"`}
                         />
                         <p className="mt-2 text-xs text-white/50">
@@ -87,7 +87,7 @@ const Troubleshooting = () => {
                         <CodeBlock
                             language="bash"
                             title="Get per-destination errors"
-                            code={`curl "https://api.iftyhasan.com/api/v1/user/notifications?search=NTF-20261018-A8F92D" \\
+                            code={`curl "https://api-notify-manage.vercel.app/api/v1/user/notifications?search=NTF-20261018-A8F92D" \\
   -H "Authorization: Bearer $TOKEN"`}
                         />
                         <p className="mt-2 text-xs text-white/50">

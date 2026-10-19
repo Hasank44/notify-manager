@@ -8,4 +8,4 @@ Disallow: /login
 Disallow: /register
 Disallow: /
 
-Sitemap: https://app.iftyhasan.com/sitemap.xml
+Sitemap: https://all-notify-manager.vercel.app/sitemap.xml

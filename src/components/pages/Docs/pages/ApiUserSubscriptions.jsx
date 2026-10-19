@@ -61,7 +61,7 @@ const ApiUserSubscriptions = () => {
                     language="js"
                     title="JavaScript"
                     code={`const response = await fetch(
-  "https://iftyhasan.com/api/v1/user/user-subscriptions",
+  "https://api-notify-manage.vercel.app/api/v1/user/user-subscriptions",
   {
     method: "POST",
     headers: {
@@ -70,7 +70,7 @@ const ApiUserSubscriptions = () => {
     },
     body: JSON.stringify({
       domainId: "6ad3da188a1471489079dd19",
-      botId: "6ad26cc5eb1769945f76543c",
+      botId: "6ad26cc5eb1769945f765...",
       externalUserId: "customer-hasan",
       chatId: "6862958488",
       name: "hasan",
@@ -86,7 +86,7 @@ const result = await response.json();`}
                     language="php"
                     title="PHP"
                     code={`<?php
-$ch = curl_init("https://iftyhasan.com/api/v1/user/user-subscriptions");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/user-subscriptions");
 curl_setopt_array($ch, [
     CURLOPT_POST => true,
     CURLOPT_RETURNTRANSFER => true,
@@ -96,7 +96,7 @@ curl_setopt_array($ch, [
     ],
     CURLOPT_POSTFIELDS => json_encode([
         "domainId" => "6ad3da188a1471489079dd19",
-        "botId" => "6ad26cc5eb1769945f76543c",
+        "botId" => "6ad26cc5eb1769945f765...",
         "externalUserId" => "customer-hasan",
         "chatId" => "6862958488",
         "name" => "hasan",
@@ -113,11 +113,11 @@ curl_close($ch);`}
                     title="Python"
                     code={`import requests
 response = requests.post(
-    "https://iftyhasan.com/api/v1/user/user-subscriptions",
+    "https://api-notify-manage.vercel.app/api/v1/user/user-subscriptions",
     headers={"Authorization": f"Bearer {access_token}"},
     json={
         "domainId": "6ad3da188a1471489079dd19",
-        "botId": "6ad26cc5eb1769945f76543c",
+        "botId": "6ad26cc5eb1769945f765...",
         "externalUserId": "customer-hasan",
         "chatId": "6862958488",
         "name": "hasan",
@@ -172,7 +172,7 @@ result = response.json()`}
                     language="js"
                     title="JavaScript"
                     code={`const response = await fetch(
-  "https://iftyhasan.com/api/v1/user/user-subscriptions/bulk",
+  "https://api-notify-manage.vercel.app/api/v1/user/user-subscriptions/bulk",
   {
     method: "POST",
     headers: {
@@ -181,7 +181,7 @@ result = response.json()`}
     },
     body: JSON.stringify({
       domainId: "6ad3da188a1471489079dd19",
-      botId: "6ad26cc5eb1769945f76543c",
+      botId: "6ad26cc5eb1769945f765...",
       subscriptions: [
         { externalUserId: "customer-1", chatId: "1111111111", name: "Customer 1" },
         { externalUserId: "customer-2", chatId: "2222222222", name: "Customer 2" },
@@ -201,7 +201,7 @@ console.log("Skipped:", result.data.skipped);`}
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/user-subscriptions/bulk");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/user-subscriptions/bulk");
 curl_setopt_array($ch, [
     CURLOPT_POST => true,
     CURLOPT_RETURNTRANSFER => true,
@@ -211,7 +211,7 @@ curl_setopt_array($ch, [
     ],
     CURLOPT_POSTFIELDS => json_encode([
         "domainId" => "6ad3da188a1471489079dd19",
-        "botId" => "6ad26cc5eb1769945f76543c",
+        "botId" => "6ad26cc5eb1769945f765...",
         "subscriptions" => [
             ["externalUserId" => "customer-1", "chatId" => "1111111111"],
             ["externalUserId" => "customer-2", "chatId" => "2222222222"]
@@ -230,11 +230,11 @@ $result = json_decode($response, true);`}
                     code={`import requests
 
 response = requests.post(
-    "https://iftyhasan.com/api/v1/user/user-subscriptions/bulk",
+    "https://api-notify-manage.vercel.app/api/v1/user/user-subscriptions/bulk",
     headers={"Authorization": f"Bearer {access_token}"},
     json={
         "domainId": "6ad3da188a1471489079dd19",
-        "botId": "6ad26cc5eb1769945f76543c",
+        "botId": "6ad26cc5eb1769945f765...",
         "subscriptions": [
             {"externalUserId": "customer-1", "chatId": "1111111111"},
             {"externalUserId": "customer-2", "chatId": "2222222222"},
@@ -281,7 +281,7 @@ result = response.json()`}
                     language="js"
                     title="JavaScript"
                     code={`const response = await fetch(
-  "https://iftyhasan.com/api/v1/user/user-subscriptions?search=hasan&active=true",
+  "https://api-notify-manage.vercel.app/api/v1/user/user-subscriptions?search=hasan&active=true",
   { headers: { Authorization: \`Bearer \${accessToken}\` } }
 );
 
@@ -296,7 +296,7 @@ result.data.items.forEach(customer => {
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/user-subscriptions?search=hasan");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/user-subscriptions?search=hasan");
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => ["Authorization: Bearer " . $accessToken],
@@ -316,7 +316,7 @@ foreach ($result["data"]["items"] as $customer) {
                     code={`import requests
 
 response = requests.get(
-    "https://iftyhasan.com/api/v1/user/user-subscriptions",
+    "https://api-notify-manage.vercel.app/api/v1/user/user-subscriptions",
     params={"search": "hasan"},
     headers={"Authorization": f"Bearer {access_token}"},
 )
@@ -337,8 +337,8 @@ for customer in result["data"]["items"]:
         "externalUserId": "customer-hasan",
         "chatId": "6862958488",
         "name": "hasan",
-        "domainId": { "domain": "shop.rahim.com" },
-        "botId": { "name": "Rahim's Shop Bot" },
+        "domainId": { "domain": "your-domain.com" },
+        "botId": { "name": "your's Shop Bot" },
         "active": true,
         "totalReceived": 5,
         "lastNotifiedAt": "2026-10-18T..."

@@ -44,7 +44,7 @@ const ApiRoutes = () => {
                 <CodeBlock
                     language="js"
                     title="JavaScript"
-                    code={`const response = await fetch("https://iftyhasan.com/api/v1/user/routes", {
+                    code={`const response = await fetch("https://api-notify-manage.vercel.app/api/v1/user/routes", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -71,7 +71,7 @@ if (result.success) {
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/routes");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/routes");
 curl_setopt_array($ch, [
     CURLOPT_POST => true,
     CURLOPT_RETURNTRANSFER => true,
@@ -100,7 +100,7 @@ $result = json_decode($response, true);`}
                     code={`import requests
 
 response = requests.post(
-    "https://iftyhasan.com/api/v1/user/routes",
+    "https://api-notify-manage.vercel.app/api/v1/user/routes",
     headers={"Authorization": f"Bearer {access_token}"},
     json={
         "domainId": "6ad3da188a1471489079dd19",
@@ -167,7 +167,7 @@ result = response.json()`}
                     language="js"
                     title="JavaScript"
                     code={`const response = await fetch(
-  "https://iftyhasan.com/api/v1/user/routes?domainId=6ad3da188a1471489079dd19",
+  "https://api-notify-manage.vercel.app/api/v1/user/routes?domainId=6ad3da188a1471489079dd19",
   { headers: { Authorization: \`Bearer \${accessToken}\` } }
 );
 
@@ -182,7 +182,7 @@ result.data.items.forEach(route => {
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/routes?domainId=6ad3da188a1471489079dd19");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/routes?domainId=6ad3da188a1471489079dd19");
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => ["Authorization: Bearer " . $accessToken],
@@ -202,7 +202,7 @@ foreach ($result["data"]["items"] as $route) {
                     code={`import requests
 
 response = requests.get(
-    "https://iftyhasan.com/api/v1/user/routes",
+    "https://api-notify-manage.vercel.app/api/v1/user/routes",
     params={"domainId": "6ad3da188a1471489079dd19"},
     headers={"Authorization": f"Bearer {access_token}"},
 )
@@ -228,7 +228,7 @@ for route in result["data"]["items"]:
                 <CodeBlock
                     language="js"
                     title="JavaScript — Update destinations"
-                    code={`await fetch(\`https://iftyhasan.com/api/v1/user/routes/\${routeId}\`, {
+                    code={`await fetch(\`https://api-notify-manage.vercel.app/api/v1/user/routes/\${routeId}\`, {
   method: "PATCH",
   headers: {
     "Content-Type": "application/json",

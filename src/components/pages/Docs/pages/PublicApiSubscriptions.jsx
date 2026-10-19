@@ -57,16 +57,16 @@ const PublicApiSubscriptions = () => {
                     language="js"
                     title="JavaScript (Node.js / Browser)"
                     code={`async function registerCustomer(chatId, name) {
-  const response = await fetch("https://iftyhasan.com/api/v1/subscriptions", {
+  const response = await fetch("https://api-notify-manage.vercel.app/api/v1/subscriptions", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      domain: "shop.rahim.com",
+      domain: "your-domain.com",
       externalUserId: \`tg-\${chatId}\`,
       chatId: String(chatId),
-      botId: "6ad26cc5eb1769945f76543c",
+      botId: "6ad26cc5eb1769945f7654..",
       name: name,
-      email: "customer@example.com"
+      email: "mdhasan.sjb@gmail.com"
     })
   });
 
@@ -105,15 +105,15 @@ app.post("/telegram/webhook", async (req, res) => {
 
 function registerCustomer($chatId, $name) {
     $payload = [
-        "domain" => "shop.rahim.com",
+        "domain" => "your-domain.com",
         "externalUserId" => "tg-" . $chatId,
         "chatId" => (string) $chatId,
-        "botId" => "6ad26cc5eb1769945f76543c",
+        "botId" => "6ad26cc5eb1769945f7654..",
         "name" => $name,
-        "email" => "customer@example.com"
+        "email" => "mdhasan.sjb@gmail.com"
     ];
     
-    $ch = curl_init("https://iftyhasan.com/api/v1/subscriptions");
+    $ch = curl_init("https://api-notify-manage.vercel.app/api/v1/subscriptions");
     curl_setopt_array($ch, [
         CURLOPT_POST => true,
         CURLOPT_RETURNTRANSFER => true,
@@ -138,7 +138,7 @@ function registerCustomer($chatId, $name) {
 }
 
 // Usage
-registerCustomer(6862958488, "Hasina");`}
+registerCustomer(6862958488, "Name");`}
                 />
             </section>
             <section>
@@ -149,12 +149,12 @@ registerCustomer(6862958488, "Hasina");`}
 
 def register_customer(chat_id, name):
     response = requests.post(
-        "https://iftyhasan.com/api/v1/subscriptions",
+        "https://api-notify-manage.vercel.app/api/v1/subscriptions",
         json={
-            "domain": "shop.rahim.com",
+            "domain": "your-domain.com",
             "externalUserId": f"tg-{chat_id}",
             "chatId": str(chat_id),
-            "botId": "6ad26cc5eb1769945f76543c",
+            "botId": "6ad26cc5eb1769945f569..",
             "name": name,
             "email": "customer@example.com",
         },
@@ -171,7 +171,7 @@ def register_customer(chat_id, name):
         raise Exception(result["message"])
 
 # Usage
-register_customer(6862958488, "Hasina")`}
+register_customer(6862958488, "Name")`}
                 />
             </section>
             <section>
@@ -188,7 +188,7 @@ register_customer(6862958488, "Hasina")`}
       "id": "6ad...",
       "externalUserId": "tg-6862958488",
       "chatId": "6862958488",
-      "name": "Hasina",
+      "name": "Name",
       "active": true,
       "totalReceived": 0
     }

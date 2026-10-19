@@ -38,7 +38,7 @@ const ApiNotifications = () => {
                     language="js"
                     title="JavaScript"
                     code={`const response = await fetch(
-  "https://iftyhasan.com/api/v1/user/notifications?status=sent&limit=20",
+  "https://api-notify-manage.vercel.app/api/v1/user/notifications?status=sent&limit=20",
   { headers: { Authorization: \`Bearer \${accessToken}\` } }
 );
 
@@ -52,7 +52,7 @@ result.data.items.forEach(notification => {
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/notifications?status=sent&limit=20");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/notifications?status=sent&limit=20");
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => ["Authorization: Bearer " . $accessToken],
@@ -72,7 +72,7 @@ foreach ($result["data"]["items"] as $notification) {
                     code={`import requests
 
 response = requests.get(
-    "https://iftyhasan.com/api/v1/user/notifications",
+    "https://api-notify-manage.vercel.app/api/v1/user/notifications",
     params={"status": "sent", "limit": 20},
     headers={"Authorization": f"Bearer {access_token}"},
 )
@@ -92,11 +92,11 @@ for notification in result["data"]["items"]:
         "id": "6ad...",
         "requestId": "NTF-20261018-A8F92D",
         "type": "custom",
-        "domain": "shop.rahim.com",
+        "domain": "your-domain.com",
         "status": "sent",
         "deliveries": [
           {
-            "destinationName": "Md Hasan Ali (Hasina)",
+            "destinationName": "Md Hasan Ali (Hasan)",
             "destinationType": "user_dynamic",
             "status": "sent",
             "messageId": "1234",
@@ -154,7 +154,7 @@ for notification in result["data"]["items"]:
                     language="js"
                     title="JavaScript"
                     code={`const response = await fetch(
-  \`https://iftyhasan.com/api/v1/user/notifications/\${notificationId}\`,
+  \`https://api-notify-manage.vercel.app/api/v1/user/notifications/\${notificationId}\`,
   { headers: { Authorization: \`Bearer \${accessToken}\` } }
 );
 
@@ -168,7 +168,7 @@ console.log("Payload:", result.data.data);`}
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/notifications/" . $notificationId);
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/notifications/" . $notificationId);
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => ["Authorization: Bearer " . $accessToken],
@@ -184,7 +184,7 @@ $result = json_decode($response, true);`}
                     code={`import requests
 
 response = requests.get(
-    f"https://iftyhasan.com/api/v1/user/notifications/{notification_id}",
+    f"https://api-notify-manage.vercel.app/api/v1/user/notifications/{notification_id}",
     headers={"Authorization": f"Bearer {access_token}"},
 )
 
@@ -205,7 +205,7 @@ result = response.json()`}
                     language="js"
                     title="JavaScript — Debug example"
                     code={`const response = await fetch(
-  \`https://iftyhasan.com/api/v1/user/notifications/\${notificationId}/deliveries\`,
+  \`https://api-notify-manage.vercel.app/api/v1/user/notifications/\${notificationId}/deliveries\`,
   { headers: { Authorization: \`Bearer \${accessToken}\` } }
 );
 
@@ -228,7 +228,7 @@ result.data.items.forEach(delivery => {
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/notifications/" . $notificationId . "/deliveries");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/notifications/" . $notificationId . "/deliveries");
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => ["Authorization: Bearer " . $accessToken],
@@ -253,7 +253,7 @@ foreach ($result["data"]["items"] as $delivery) {
                     code={`import requests
 
 response = requests.get(
-    f"https://iftyhasan.com/api/v1/user/notifications/{notification_id}/deliveries",
+    f"https://api-notify-manage.vercel.app/api/v1/user/notifications/{notification_id}/deliveries",
     headers={"Authorization": f"Bearer {access_token}"},
 )
 
@@ -286,7 +286,7 @@ for delivery in result["data"]["items"]:
       },
       {
         "destinationType": "user_dynamic",
-        "destinationName": "B2C Buyer (Hasina)",
+        "destinationName": "B2C Buyer (Hasan)",
         "status": "sent",
         "messageId": "1235",
         "error": null,

@@ -1,82 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://app.iftyhasan.com/docs</loc>
+    <loc>https://all-notify-manager.vercel.app/docs</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://app.iftyhasan.com/docs/quick-start</loc>
+    <loc>https://all-notify-manager.vercel.app/docs/quick-start</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://app.iftyhasan.com/docs/examples</loc>
+    <loc>https://all-notify-manager.vercel.app/docs/examples</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://app.iftyhasan.com/docs/public-api/notify</loc>
+    <loc>https://all-notify-manager.vercel.app/docs/public-api/notify</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://app.iftyhasan.com/docs/public-api/subscriptions</loc>
+    <loc>https://all-notify-manager.vercel.app/docs/public-api/subscriptions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://app.iftyhasan.com/docs/authentication</loc>
+    <loc>https://all-notify-manager.vercel.app/docs/authentication</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://app.iftyhasan.com/docs/api/domains</loc>
+    <loc>https://all-notify-manager.vercel.app/docs/api/domains</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://app.iftyhasan.com/docs/api/bots</loc>
+    <loc>https://all-notify-manager.vercel.app/docs/api/bots</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://app.iftyhasan.com/docs/api/destinations</loc>
+    <loc>https://all-notify-manager.vercel.app/docs/api/destinations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://app.iftyhasan.com/docs/api/routes</loc>
+    <loc>https://all-notify-manager.vercel.app/docs/api/routes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://app.iftyhasan.com/docs/api/user-subscriptions</loc>
+    <loc>https://all-notify-manager.vercel.app/docs/api/user-subscriptions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://app.iftyhasan.com/docs/api/notifications</loc>
+    <loc>https://all-notify-manager.vercel.app/docs/api/notifications</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://app.iftyhasan.com/docs/errors</loc>
+    <loc>https://all-notify-manager.vercel.app/docs/errors</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://app.iftyhasan.com/docs/rate-limits</loc>
+    <loc>https://all-notify-manager.vercel.app/docs/rate-limits</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://app.iftyhasan.com/docs/troubleshooting</loc>
+    <loc>https://all-notify-manager.vercel.app/docs/troubleshooting</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://app.iftyhasan.com/docs/faq</loc>
+    <loc>https://all-notify-manager.vercel.app/docs/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

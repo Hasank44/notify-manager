@@ -115,9 +115,9 @@ import fetch from "node-fetch";
 const app = express();
 app.use(express.json());
 
-const NOTIFY_API = "https://api.iftyhasan.com/api/v1";
-const DOMAIN = "shop.rahim.com";
-const BOT_ID = "6ad26cc5eb1769945f76543c";
+const NOTIFY_API = "https://api-notify-manage.vercel.app/api/v1";
+const DOMAIN = "your-domain.com";
+const BOT_ID = "6ad26cc5eb1769945f52879";
 
 /* ─── 1. Telegram webhook: register customer on /start ─── */
 app.post("/telegram/webhook", async (req, res) => {
@@ -648,8 +648,6 @@ app.listen(3000, () => {
 });`}
                     />
                 </section>
-
-                {/* Example 6: Retry pattern */}
                 <section id="retry-pattern" className="scroll-mt-20">
                     <div className="mb-3 flex items-center gap-2">
                         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400">
@@ -759,7 +757,7 @@ if (!result.ok) {
 }`}
                     />
 
-                    <div className="mt-4">
+                    <div className="mt-3">
                         <h3 className="mb-2 text-sm font-semibold text-gray-100">
                             Retry Decision Tree
                         </h3>

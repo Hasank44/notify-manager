@@ -83,7 +83,7 @@ const ApiDestinations = () => {
                 <CodeBlock
                     language="js"
                     title="JavaScript — Static user destination"
-                    code={`const response = await fetch("https://iftyhasan.com/api/v1/user/destinations", {
+                    code={`const response = await fetch("https://api-notify-manage.vercel.app/api/v1/user/destinations", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -93,7 +93,7 @@ const ApiDestinations = () => {
     name: "My Personal Chat",
     type: "user",
     identifier: "6862958488",
-    botId: "6ad26cc5eb1769945f76543c"
+    botId: "6ad26cc5eb1769945f765..."
   })
 });
 
@@ -107,7 +107,7 @@ if (result.success) {
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/destinations");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/destinations");
 curl_setopt_array($ch, [
     CURLOPT_POST => true,
     CURLOPT_RETURNTRANSFER => true,
@@ -119,7 +119,7 @@ curl_setopt_array($ch, [
         "name" => "My Personal Chat",
         "type" => "user",
         "identifier" => "6862958488",
-        "botId" => "6ad26cc5eb1769945f76543c"
+        "botId" => "6ad26cc5eb1769945f765..."
     ]),
 ]);
 
@@ -132,13 +132,13 @@ $result = json_decode($response, true);`}
                     title="Python"
                     code={`import requests
 response = requests.post(
-    "https://iftyhasan.com/api/v1/user/destinations",
+    "https://api-notify-manage.vercel.app/api/v1/user/destinations",
     headers={"Authorization": f"Bearer {access_token}"},
     json={
         "name": "My Personal Chat",
         "type": "user",
         "identifier": "6862958488",
-        "botId": "6ad26cc5eb1769945f76543c",
+        "botId": "6ad26cc5eb1769945f765...",
     },
 )
 
@@ -190,7 +190,7 @@ result = response.json()`}
                     language="js"
                     title="JavaScript — Dynamic single"
                     code={`// user_dynamic: resolves ONE customer per notify call (via data.userId)
-const response = await fetch("https://iftyhasan.com/api/v1/user/destinations", {
+const response = await fetch("https://api-notify-manage.vercel.app/api/v1/user/destinations", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -199,12 +199,12 @@ const response = await fetch("https://iftyhasan.com/api/v1/user/destinations", {
   body: JSON.stringify({
     name: "B2C Buyer",
     type: "user_dynamic",
-    botId: "6ad26cc5eb1769945f76543c"
+    botId: "6ad26cc5eb1769945f765..."
   })
 });
 
 // user_dynamic_broadcast: sends to ALL active subscribers
-const broadcastRes = await fetch("https://iftyhasan.com/api/v1/user/destinations", {
+const broadcastRes = await fetch("https://api-notify-manage.vercel.app/api/v1/user/destinations", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -213,7 +213,7 @@ const broadcastRes = await fetch("https://iftyhasan.com/api/v1/user/destinations
   body: JSON.stringify({
     name: "All Subscribers",
     type: "user_dynamic_broadcast",
-    botId: "6ad26cc5eb1769945f76543c"
+    botId: "6ad26cc5eb1769945f765..."
   })
 });`}
                 />
@@ -222,7 +222,7 @@ const broadcastRes = await fetch("https://iftyhasan.com/api/v1/user/destinations
                     language="php"
                     title="PHP"
                     code={`<?php
-$ch = curl_init("https://iftyhasan.com/api/v1/user/destinations");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/destinations");
 curl_setopt_array($ch, [
     CURLOPT_POST => true,
     CURLOPT_RETURNTRANSFER => true,
@@ -233,7 +233,7 @@ curl_setopt_array($ch, [
     CURLOPT_POSTFIELDS => json_encode([
         "name" => "B2C Buyer",
         "type" => "user_dynamic",
-        "botId" => "6ad26cc5eb1769945f76543c"
+        "botId" => "6ad26cc5eb1769945f765..."
     ]),
 ]);
 
@@ -247,12 +247,12 @@ $result = json_decode($response, true);`}
                     code={`import requests
 
 response = requests.post(
-    "https://iftyhasan.com/api/v1/user/destinations",
+    "https://api-notify-manage.vercel.app/api/v1/user/destinations",
     headers={"Authorization": f"Bearer {access_token}"},
     json={
         "name": "B2C Buyer",
         "type": "user_dynamic",
-        "botId": "6ad26cc5eb1769945f76543c",
+        "botId": "6ad26cc5eb1769945f765...",
     },
 )
 
@@ -306,7 +306,7 @@ result = response.json()`}
                     language="js"
                     title="JavaScript"
                     code={`const response = await fetch(
-  "https://iftyhasan.com/api/v1/user/destinations?type=user_dynamic&active=true",
+  "https://api-notify-manage.vercel.app/api/v1/user/destinations?type=user_dynamic&active=true",
   { headers: { Authorization: \`Bearer \${accessToken}\` } }
 );
 
@@ -320,7 +320,7 @@ result.data.items.forEach(dest => {
                     title="PHP"
                     code={`<?php
 
-$ch = curl_init("https://iftyhasan.com/api/v1/user/destinations?type=user_dynamic");
+$ch = curl_init("https://api-notify-manage.vercel.app/api/v1/user/destinations?type=user_dynamic");
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => ["Authorization: Bearer " . $accessToken],
@@ -339,7 +339,7 @@ foreach ($result["data"]["items"] as $dest) {
                     title="Python"
                     code={`import requests
 response = requests.get(
-    "https://iftyhasan.com/api/v1/user/destinations",
+    "https://api-notify-manage.vercel.app/api/v1/user/destinations",
     params={"type": "user_dynamic"},
     headers={"Authorization": f"Bearer {access_token}"},
 )
