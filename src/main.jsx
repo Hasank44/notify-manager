@@ -42,6 +42,7 @@ import RateLimits from "./components/pages/Docs/pages/RateLimits";
 import Troubleshooting from "./components/pages/Docs/pages/Troubleshooting";
 import Faq from "./components/pages/Docs/pages/Faq";
 import Examples from "./components/pages/Docs/Examples";
+import ApiKeys from "./components/pages/Docs/pages/ApiKeys";
 
 const router = createBrowserRouter([
   { path: "/login", element: (<PublicRoute><Login /></PublicRoute>)},
@@ -71,6 +72,7 @@ const router = createBrowserRouter([
       { index: true, element: <Overview /> },
       { path: "quick-start", element: <QuickStart /> },
       { path: "authentication", element: <Authentication /> },
+      { path: "api-keys", element: <ApiKeys /> },
       { path: "public-api/subscriptions", element: <PublicApiSubscriptions /> },
       { path: "public-api/notify", element: <PublicApiNotify /> },
       { path: "api/domains", element: <ApiDomains /> },

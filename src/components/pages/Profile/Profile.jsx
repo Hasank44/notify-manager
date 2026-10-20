@@ -1,17 +1,7 @@
 import { useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "sonner";
-import {
-    Building2,
-    Calendar,
-    Globe,
-    Key,
-    Mail,
-    Phone,
-    Save,
-    Shield,
-    User as UserIcon,
-} from "lucide-react";
+import { Building2, Calendar, Globe, Key, Mail, Phone, Save, Shield, User as UserIcon } from "lucide-react";
 import axiosInstance from "@/api/axiosInstance";
 import ENDPOINTS from "@/api/endpoints";
 import { setUser } from "@/redux/userSlice";
@@ -21,7 +11,6 @@ import { formatDateTime, formatRelative } from "@/utils/formatDate";
 const Profile = () => {
     const user = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
-
     const [refreshing, setRefreshing] = useState(false);
     const [profileForm, setProfileForm] = useState({
         name: user?.name ?? "",
@@ -61,7 +50,6 @@ const Profile = () => {
 
     if (!user) return null;
 
-    /* ─── Profile update ────────────────────────────────── */
     const handleProfileChange = (e) => {
         const { name, value } = e.target;
         setProfileForm((prev) => ({ ...prev, [name]: value }));
@@ -72,12 +60,10 @@ const Profile = () => {
         const next = {};
         if (!profileForm.name.trim()) next.name = "Name is required";
         else if (profileForm.name.length > 120) next.name = "Max 120 characters";
-
         if (!profileForm.phone.trim()) next.phone = "Phone is required";
         else if (!/^\+?[0-9\s\-()]{7,20}$/.test(profileForm.phone.trim())) {
             next.phone = "Invalid phone number";
         }
-
         setProfileErrors(next);
         return Object.keys(next).length === 0;
     };
@@ -85,7 +71,6 @@ const Profile = () => {
     const handleProfileSubmit = async (e) => {
         e.preventDefault();
         if (!validateProfile()) return;
-
         setSavingProfile(true);
         try {
             const response = await axiosInstance.patch(ENDPOINTS.auth.profile, {
@@ -103,7 +88,6 @@ const Profile = () => {
         }
     };
 
-    /* ─── Password change ───────────────────────────────── */
     const handlePwChange = (e) => {
         const { name, value } = e.target;
         setPwForm((prev) => ({ ...prev, [name]: value }));
@@ -115,10 +99,7 @@ const Profile = () => {
         if (!pwForm.currentPassword) next.currentPassword = "Current password required";
         if (!pwForm.newPassword) next.newPassword = "New password required";
         else if (pwForm.newPassword.length < 8) next.newPassword = "At least 8 characters";
-        else if (
-            !/[A-Za-z]/.test(pwForm.newPassword) ||
-            !/[0-9]/.test(pwForm.newPassword)
-        ) {
+        else if (!/[A-Za-z]/.test(pwForm.newPassword) || !/[0-9]/.test(pwForm.newPassword)) {
             next.newPassword = "Must contain at least one letter and one number";
         }
         if (pwForm.newPassword !== pwForm.confirmPassword) {
@@ -131,7 +112,6 @@ const Profile = () => {
     const handlePwSubmit = async (e) => {
         e.preventDefault();
         if (!validatePw()) return;
-
         setSavingPw(true);
         try {
             await axiosInstance.patch(ENDPOINTS.auth.changePassword, {
@@ -157,8 +137,6 @@ const Profile = () => {
                 onRefresh={handleRefresh}
                 refreshing={refreshing}
             />
-
-            {/* Account info */}
             <div className="card">
                 <div className="mb-3 flex items-center gap-3">
                     <div className="flex h-12 w-12 items-center justify-center rounded-md bg-gradient-to-br from-indigo-500 to-purple-500 text-lg font-bold text-white">
@@ -176,7 +154,6 @@ const Profile = () => {
                         </p>
                     </div>
                 </div>
-
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     <InfoRow icon={UserIcon} label="Username" value={user.username} />
                     <InfoRow icon={Mail} label="Email" value={user.email} />
@@ -192,8 +169,6 @@ const Profile = () => {
                     />
                 </div>
             </div>
-
-            {/* Edit profile */}
             <div className="card">
                 <div className="mb-3">
                     <h2 className="text-base font-semibold text-gray-100">
@@ -214,11 +189,8 @@ const Profile = () => {
                             disabled={savingProfile}
                             className={`input ${profileErrors.name ? "input-error" : ""}`}
                         />
-                        {profileErrors.name && (
-                            <p className="error-text">{profileErrors.name}</p>
-                        )}
+                        {profileErrors.name && ( <p className="error-text">{profileErrors.name}</p> )}
                     </div>
-
                     <div>
                         <label className="label">Phone</label>
                         <div className="relative">
@@ -234,11 +206,8 @@ const Profile = () => {
                                 className={`input pl-8 ${profileErrors.phone ? "input-error" : ""}`}
                             />
                         </div>
-                        {profileErrors.phone && (
-                            <p className="error-text">{profileErrors.phone}</p>
-                        )}
+                        {profileErrors.phone && (<p className="error-text">{profileErrors.phone}</p>)}
                     </div>
-
                     <div className="grid grid-cols-2 gap-2">
                         <div>
                             <label className="label">Company</label>
@@ -256,7 +225,6 @@ const Profile = () => {
                                 />
                             </div>
                         </div>
-
                         <div>
                             <label className="label">Country</label>
                             <div className="relative">
@@ -274,7 +242,6 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-
                     <button
                         type="submit"
                         disabled={savingProfile}
@@ -293,8 +260,6 @@ const Profile = () => {
                     </button>
                 </form>
             </div>
-
-            {/* Change password */}
             <div className="card">
                 <div className="mb-3">
                     <h2 className="text-base font-semibold text-gray-100">
@@ -304,8 +269,7 @@ const Profile = () => {
                         Min 8 characters, at least one letter and one number
                     </p>
                 </div>
-
-                <form onSubmit={handlePwSubmit} className="space-y-3 max-w-md">
+                <form onSubmit={handlePwSubmit} className="space-y-3">
                     <div>
                         <label className="label">Current Password</label>
                         <input
@@ -317,11 +281,8 @@ const Profile = () => {
                             disabled={savingPw}
                             className={`input ${pwErrors.currentPassword ? "input-error" : ""}`}
                         />
-                        {pwErrors.currentPassword && (
-                            <p className="error-text">{pwErrors.currentPassword}</p>
-                        )}
+                        {pwErrors.currentPassword && (<p className="error-text">{pwErrors.currentPassword}</p>)}
                     </div>
-
                     <div>
                         <label className="label">New Password</label>
                         <input
@@ -333,11 +294,8 @@ const Profile = () => {
                             disabled={savingPw}
                             className={`input ${pwErrors.newPassword ? "input-error" : ""}`}
                         />
-                        {pwErrors.newPassword && (
-                            <p className="error-text">{pwErrors.newPassword}</p>
-                        )}
+                        {pwErrors.newPassword && (<p className="error-text">{pwErrors.newPassword}</p>)}
                     </div>
-
                     <div>
                         <label className="label">Confirm New Password</label>
                         <input
@@ -349,11 +307,8 @@ const Profile = () => {
                             disabled={savingPw}
                             className={`input ${pwErrors.confirmPassword ? "input-error" : ""}`}
                         />
-                        {pwErrors.confirmPassword && (
-                            <p className="error-text">{pwErrors.confirmPassword}</p>
-                        )}
+                        {pwErrors.confirmPassword && (<p className="error-text">{pwErrors.confirmPassword}</p>)}
                     </div>
-
                     <button type="submit" disabled={savingPw} className="btn-primary">
                         {savingPw ? (
                             <>

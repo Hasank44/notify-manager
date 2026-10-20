@@ -84,7 +84,7 @@ const NotificationDetails = ({ open, notification, onClose }) => {
                         </Row>
                     </div>
 
-                    <div className="mt-4">
+                    <div className="mt-3">
                         <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-white/40">
                             Data Payload
                         </p>

@@ -48,16 +48,16 @@ const RecentNotifications = ({ loading}) => {
                             {items?.map((n) => (
                                 <tr key={n.id}>
                                     <td>
-                                        <code className="rounded bg-white/5 px-1.5 py-0.5 text-[11px] text-indigo-300">
-                                            {n.requestId}
+                                        <code className="rounded whitespace-nowrap bg-white/5 px-1.5 py-0.5 text-[11px] text-indigo-300">
+                                            {n?.requestId}
                                         </code>
                                     </td>
                                     <td className="capitalize">{n.type}</td>
                                     <td>{n.domain}</td>
-                                    <td>
+                                    <td className="whitespace-nowrap">
                                         <StatusBadge status={n.status} type="notification" />
                                     </td>
-                                    <td className="text-xs text-muted">
+                                    <td className="text-xs whitespace-nowrap text-muted">
                                         {formatRelative(n.createdAt)}
                                     </td>
                                 </tr>

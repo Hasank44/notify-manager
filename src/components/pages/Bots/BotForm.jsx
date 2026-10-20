@@ -15,12 +15,10 @@ const EMPTY_FORM = {
 const BotForm = ({ open, bot, saving = false, onClose, onSubmit }) => {
     const [form, setForm] = useState(EMPTY_FORM);
     const [errors, setErrors] = useState({});
-
     const isEdit = !!bot;
 
     useEffect(() => {
         if (!open) return;
-
         if (bot) {
             setForm({
                 name: bot.name ?? "",
@@ -47,30 +45,26 @@ const BotForm = ({ open, bot, saving = false, onClose, onSubmit }) => {
 
     const validate = () => {
         const next = {};
-
         if (!form.name.trim()) {
             next.name = "Name is required";
         } else if (form.name.length > 120) {
             next.name = "Max 120 characters";
-        }
-
+        };
         if (form.username.trim()) {
             const username = form.username.trim().replace(/^@/, "");
             if (!USERNAME_PATTERN.test(username)) {
                 next.username = "3-64 chars: letters, numbers, underscore only";
-            }
-        }
-
+            };
+        };
         if (!isEdit) {
             if (!form.token.trim()) {
                 next.token = "Token is required";
             } else if (!TOKEN_PATTERN.test(form.token.trim())) {
                 next.token = "Invalid token format (e.g. 123456:ABC-DEF…)";
-            }
+            };
         } else if (form.token.trim() && !TOKEN_PATTERN.test(form.token.trim())) {
             next.token = "Invalid token format";
-        }
-
+        };
         setErrors(next);
         return Object.keys(next).length === 0;
     };
@@ -78,22 +72,19 @@ const BotForm = ({ open, bot, saving = false, onClose, onSubmit }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validate()) return;
-
         const payload = {
             name: form.name.trim(),
             username: form.username.trim().replace(/^@/, "").toLowerCase(),
             active: !!form.active,
         };
-
         if (form.token.trim()) {
             payload.token = form.token.trim();
-        }
-
+        };
         try {
             await onSubmit(payload);
         } catch {
             /* interceptor toasts */
-        }
+        };
     };
 
     return createPortal(
@@ -102,7 +93,6 @@ const BotForm = ({ open, bot, saving = false, onClose, onSubmit }) => {
                 className="absolute inset-0 bg-black/70 backdrop-blur-sm"
                 onClick={() => !saving && onClose()}
             />
-
             <div className="relative z-10 w-full max-w-md animate-fade-in">
                 <form onSubmit={handleSubmit} className="card">
                     <button
@@ -114,18 +104,14 @@ const BotForm = ({ open, bot, saving = false, onClose, onSubmit }) => {
                     >
                         <X size={16} />
                     </button>
-
-                    <div className="mb-4 pr-8">
+                    <div className="mb-3 pr-8">
                         <h3 className="text-base font-semibold text-gray-100">
                             {isEdit ? "Edit Bot" : "New Telegram Bot"}
                         </h3>
                         <p className="text-xs text-muted">
-                            {isEdit
-                                ? "Leave the token blank to keep the current one."
-                                : "Your bot will be submitted for admin approval."}
+                            {isEdit ? "Leave the token blank to keep the current one." : "Your bot will be submitted for admin approval."}
                         </p>
                     </div>
-
                     <div className="space-y-3">
                         <div>
                             <label className="label">Bot Name</label>
@@ -140,7 +126,6 @@ const BotForm = ({ open, bot, saving = false, onClose, onSubmit }) => {
                             />
                             {errors.name && <p className="error-text">{errors.name}</p>}
                         </div>
-
                         <div>
                             <label className="label">
                                 Bot Username
@@ -167,7 +152,6 @@ const BotForm = ({ open, bot, saving = false, onClose, onSubmit }) => {
                                 Auto-detected from Telegram if left blank
                             </p>
                         </div>
-
                         <div>
                             <label className="label">
                                 Bot Token
@@ -198,7 +182,6 @@ const BotForm = ({ open, bot, saving = false, onClose, onSubmit }) => {
                                 Get this from @BotFather. Never share it publicly.
                             </p>
                         </div>
-
                         <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-white/5 bg-white/[0.02] px-3 py-2">
                             <input
                                 type="checkbox"
@@ -213,8 +196,7 @@ const BotForm = ({ open, bot, saving = false, onClose, onSubmit }) => {
                             </span>
                         </label>
                     </div>
-
-                    <div className="mt-4 flex justify-end gap-2">
+                    <div className="mt-3 flex justify-end gap-2">
                         <button
                             type="button"
                             onClick={onClose}

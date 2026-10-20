@@ -45,7 +45,6 @@ const Routes = () => {
         return params;
     }, [page, limit, statusFilter, activeFilter]);
 
-    /* Cache-aware fetch */
     useEffect(() => {
         routes.fetchAll(queryParams).catch(() => { });
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -116,21 +115,20 @@ const Routes = () => {
                     </button>
                 }
             />
-
             <div className="card">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
                     <div className="flex-1 text-sm text-muted">
                         {routes.pagination.total} route
                         {routes.pagination.total === 1 ? "" : "s"} configured
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 items-center gap-2">
                         <select
                             value={statusFilter}
                             onChange={(e) => {
                                 setStatusFilter(e.target.value);
                                 setPage(1);
                             }}
-                            className="select w-36"
+                            className="select w-38"
                         >
                             {STATUS_FILTERS.map((f) => (
                                 <option key={f.value} value={f.value}>
@@ -144,7 +142,7 @@ const Routes = () => {
                                 setActiveFilter(e.target.value);
                                 setPage(1);
                             }}
-                            className="select w-32"
+                            className="select w-38"
                         >
                             {ACTIVE_FILTERS.map((f) => (
                                 <option key={f.value} value={f.value}>
@@ -166,21 +164,20 @@ const Routes = () => {
                     </div>
                 </div>
             </div>
-
-            <RouteTable
-                items={routes.items}
-                loading={routes.loading}
-                onEdit={openEdit}
-                onDelete={setDeleteTarget}
-            />
-
-            <Pagination
-                page={routes.pagination.page}
-                limit={routes.pagination.limit}
-                total={routes.pagination.total}
-                onPageChange={setPage}
-            />
-
+            <div>
+                <RouteTable
+                    items={routes.items}
+                    loading={routes.loading}
+                    onEdit={openEdit}
+                    onDelete={setDeleteTarget}
+                />
+                <Pagination
+                    page={routes.pagination.page}
+                    limit={routes.pagination.limit}
+                    total={routes.pagination.total}
+                    onPageChange={setPage}
+                />
+            </div>
             <RouteForm
                 open={formOpen}
                 route={editTarget}
@@ -191,7 +188,6 @@ const Routes = () => {
                 }}
                 onSubmit={handleSubmit}
             />
-
             <ConfirmModal
                 open={!!deleteTarget}
                 title="Delete route?"

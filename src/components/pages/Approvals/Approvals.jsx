@@ -113,7 +113,6 @@ const Approvals = () => {
                 onRefresh={handleRefresh}
                 refreshing={refreshing}
             />
-
             <div className="card">
                 <div className="flex items-center justify-between">
                     <div className="text-sm text-muted">
@@ -139,9 +138,7 @@ const Approvals = () => {
                     </select>
                 </div>
             </div>
-
             {loading && <Loader />}
-
             {!loading && (
                 <DataTable
                     columns={columns}

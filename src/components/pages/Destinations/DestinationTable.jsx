@@ -42,7 +42,7 @@ const DestinationTable = ({ items, loading, onEdit, onDelete }) => {
             label: "Type",
             render: (d) => (
                 <span
-                    className={`badge border capitalize ${TYPE_COLORS[d.type] ?? ""}`}
+                    className={`badge border whitespace-nowrap capitalize ${TYPE_COLORS[d.type] ?? ""}`}
                 >
                     {formatType(d.type)}
                 </span>

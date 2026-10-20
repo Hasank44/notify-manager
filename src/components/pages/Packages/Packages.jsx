@@ -10,7 +10,6 @@ import UpgradeModal from "./UpgradeModal";
 
 const Packages = () => {
     const user = useSelector((state) => state.user.user);
-
     const [packages, setPackages] = useState([]);
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
@@ -34,7 +33,6 @@ const Packages = () => {
     useEffect(() => {
         load();
     }, [load]);
-
     const handleRefresh = () => {
         load(true);
         toast.info("Refreshing packages…");
@@ -44,9 +42,7 @@ const Packages = () => {
         setSubmitting(true);
         try {
             await axiosInstance.post(ENDPOINTS.subscriptions.create, payload);
-            toast.success(
-                "Upgrade request submitted! Admin will verify your payment shortly."
-            );
+            toast.success("Upgrade request submitted! Admin will verify your payment shortly.");
             setUpgradeTarget(null);
         } finally {
             setSubmitting(false);
@@ -70,20 +66,17 @@ const Packages = () => {
                     verifies payment and activates your plan within minutes.
                 </p>
             </div>
-
             {loading && <Loader full />}
             {!loading && packages.length === 0 && (
                 <div className="card text-center text-sm text-muted">
                     No packages available right now.
                 </div>
             )}
-
-            {!loading && packages.length > 0 && (
-                <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+            {!loading && packages?.length > 0 && (
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {packages.map((pkg) => {
                         const isCurrent = String(pkg.id) === String(currentPkgId);
                         const isHighlighted = pkg.highlighted === true;
-
                         return (
                             <div
                                 key={pkg.id}
@@ -98,7 +91,6 @@ const Packages = () => {
                                         Popular
                                     </div>
                                 )}
-
                                 <div className="mb-3">
                                     <h3 className="text-lg font-semibold text-gray-100">
                                         {pkg.label}
@@ -107,7 +99,6 @@ const Packages = () => {
                                         {pkg.description || "—"}
                                     </p>
                                 </div>
-
                                 <div className="mb-3">
                                     <div className="flex items-baseline gap-1">
                                         <span className="text-3xl font-bold text-white">
@@ -119,7 +110,6 @@ const Packages = () => {
                                         </span>
                                     </div>
                                 </div>
-
                                 <div className="mb-3 space-y-1.5 text-sm">
                                     <div className="flex items-center justify-between text-xs">
                                         <span className="text-white/60">Domains</span>
@@ -136,11 +126,7 @@ const Packages = () => {
                                     <div className="flex items-center justify-between text-xs">
                                         <span className="text-white/60">Own Bot</span>
                                         <span
-                                            className={
-                                                pkg.allowOwnBot
-                                                    ? "text-emerald-400"
-                                                    : "text-white/30"
-                                            }
+                                            className={pkg.allowOwnBot ? "text-emerald-400" : "text-white/30"}
                                         >
                                             {pkg.allowOwnBot ? "✓" : "—"}
                                         </span>
@@ -148,9 +134,7 @@ const Packages = () => {
                                     <div className="flex items-center justify-between text-xs">
                                         <span className="text-white/60">B2C Customers</span>
                                         <span
-                                            className={
-                                                pkg.allowB2C ? "text-emerald-400" : "text-white/30"
-                                            }
+                                            className={pkg.allowB2C ? "text-emerald-400" : "text-white/30"}
                                         >
                                             {pkg.allowB2C ? "✓" : "—"}
                                         </span>
@@ -158,17 +142,12 @@ const Packages = () => {
                                     <div className="flex items-center justify-between text-xs">
                                         <span className="text-white/60">Channels</span>
                                         <span
-                                            className={
-                                                pkg.allowChannel
-                                                    ? "text-emerald-400"
-                                                    : "text-white/30"
-                                            }
+                                            className={pkg.allowChannel ? "text-emerald-400" : "text-white/30"}
                                         >
                                             {pkg.allowChannel ? "✓" : "—"}
                                         </span>
                                     </div>
                                 </div>
-
                                 {pkg.features?.length > 0 && (
                                     <div className="mb-3 flex-1 space-y-1.5 border-t border-white/5 pt-3">
                                         {pkg.features.slice(0, 5).map((f, i) => (
@@ -185,22 +164,18 @@ const Packages = () => {
                                         ))}
                                     </div>
                                 )}
-
                                 <button
                                     type="button"
                                     onClick={() => setUpgradeTarget(pkg)}
                                     disabled={isCurrent}
-                                    className={`w-full ${isCurrent ? "btn-secondary" : "btn-primary"
-                                        }`}
+                                    className={`w-full ${isCurrent ? "btn-secondary" : "btn-primary"}`}
                                 >
                                     {isCurrent ? (
                                         <>
                                             <Check size={14} />
                                             Current Plan
                                         </>
-                                    ) : (
-                                        "Upgrade to this plan"
-                                    )}
+                                    ) : ("Upgrade to this plan")}
                                 </button>
                             </div>
                         );

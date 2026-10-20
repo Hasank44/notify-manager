@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 import { Lock, Plus } from "lucide-react";
 import { toast } from "sonner";
 import { useEntity } from "@/hooks/useEntity";
@@ -21,18 +22,14 @@ const Bots = () => {
     const user = useSelector((state) => state.user.user);
     const pkg = user?.packageId ?? user?.package ?? null;
     const allowOwnBot = pkg?.allowOwnBot === true;
-
     const bots = useEntity(entities.bots);
-
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(DEFAULT_PAGE_SIZE);
     const [activeFilter, setActiveFilter] = useState("");
-
     const [formOpen, setFormOpen] = useState(false);
     const [editTarget, setEditTarget] = useState(null);
     const [deleteTarget, setDeleteTarget] = useState(null);
     const [saving, setSaving] = useState(false);
-
     const queryParams = useMemo(() => {
         const params = { page, limit };
         if (activeFilter === "true") params.active = true;
@@ -40,7 +37,6 @@ const Bots = () => {
         return params;
     }, [page, limit, activeFilter]);
 
-    /* Cache-aware fetch */
     useEffect(() => {
         if (!allowOwnBot) return;
         bots.fetchAll(queryParams).catch(() => { });
@@ -48,10 +44,7 @@ const Bots = () => {
     }, [page, limit, activeFilter, allowOwnBot]);
 
     const handleRefresh = () => {
-        bots
-            .refresh(queryParams)
-            .then(() => toast.success("Bots refreshed"))
-            .catch(() => { });
+        bots.refresh(queryParams).then(() => toast.success("Bots refreshed")).catch(() => { });
     };
 
     const openCreate = () => {
@@ -95,7 +88,6 @@ const Bots = () => {
         }
     };
 
-    /* Feature gate — show locked state if package doesn't allow own bot */
     if (!allowOwnBot) {
         return (
             <div className="space-y-3">
@@ -113,12 +105,12 @@ const Bots = () => {
                             support adding your own Telegram bots. Upgrade to Pro or higher
                             to use your own bot for notifications.
                         </p>
-                        <a
-                            href="/packages"
+                        <Link
+                            to={"/packages"}
                             className="btn-primary btn-sm mt-4"
                         >
                             View Plans
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

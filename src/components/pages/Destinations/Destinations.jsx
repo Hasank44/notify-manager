@@ -34,19 +34,16 @@ const STATUS_FILTERS = [
 
 const Destinations = () => {
     const destinations = useEntity(entities.destinations);
-
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(DEFAULT_PAGE_SIZE);
     const [search, setSearch] = useState("");
     const [typeFilter, setTypeFilter] = useState("");
     const [statusFilter, setStatusFilter] = useState("");
     const [activeFilter, setActiveFilter] = useState("");
-
     const [formOpen, setFormOpen] = useState(false);
     const [editTarget, setEditTarget] = useState(null);
     const [deleteTarget, setDeleteTarget] = useState(null);
     const [saving, setSaving] = useState(false);
-
     const debouncedSearch = useDebounce(search, 350);
 
     const queryParams = useMemo(() => {

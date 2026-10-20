@@ -1,12 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {
-    CheckCircle2,
-    Edit3,
-    GitBranch,
-    MoreVertical,
-    Trash2,
-    XCircle,
-} from "lucide-react";
+import { CheckCircle2, Edit3, GitBranch, MoreVertical, Trash2, XCircle } from "lucide-react";
 import DataTable from "../../shared/DataTable";
 import StatusBadge from "../../shared/StatusBadge";
 import EmptyState from "../../shared/EmptyState";
@@ -33,10 +26,7 @@ const RouteTable = ({ items, loading, onEdit, onDelete }) => {
             label: "Destinations",
             render: (r) => {
                 const list = r.destinations ?? [];
-                const activeCount = list.filter(
-                    (d) => d.active && d.status === "approved"
-                ).length;
-
+                const activeCount = list.filter((d) => d.active && d.status === "approved").length;
                 return (
                     <div className="max-w-[220px]">
                         <p className="text-sm text-gray-100">
@@ -125,7 +115,6 @@ const RouteTable = ({ items, loading, onEdit, onDelete }) => {
 const ActionMenu = ({ onEdit, onDelete }) => {
     const [open, setOpen] = useState(false);
     const ref = useRef(null);
-
     useEffect(() => {
         const handler = (e) => {
             if (ref.current && !ref.current.contains(e.target)) setOpen(false);
@@ -144,7 +133,6 @@ const ActionMenu = ({ onEdit, onDelete }) => {
             >
                 <MoreVertical size={16} />
             </button>
-
             {open && (
                 <div className="absolute right-0 top-9 z-20 w-40 overflow-hidden rounded-lg border border-white/10 bg-[#0B1220] p-1 shadow-xl">
                     <button

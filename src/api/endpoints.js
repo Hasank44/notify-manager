@@ -41,6 +41,14 @@ export const ENDPOINTS = {
         detail: (id) => `/user/domains/${id}`,
         update: (id) => `/user/domains/${id}`,
         remove: (id) => `/user/domains/${id}`,
+        // API Keys
+        keys: {
+            list: (domainId) => `/user/domains/${domainId}/keys`,
+            create: (domainId) => `/user/domains/${domainId}/keys`,
+            update: (domainId, keyId) => `/user/domains/${domainId}/keys/${keyId}`,
+            rotate: (domainId, keyId) => `/user/domains/${domainId}/keys/${keyId}/rotate`,
+            revoke: (domainId, keyId) => `/user/domains/${domainId}/keys/${keyId}/revoke`,
+        },
     },
     systemBot: "/user/system-bot",
     /* ─── Bots ──────────────────────────────────────────── */

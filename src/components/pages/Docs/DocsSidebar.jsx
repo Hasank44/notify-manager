@@ -19,6 +19,7 @@ const NAV = [
         title: "Public API",
         icon: Globe,
         items: [
+            { to: "/docs/api-keys", label: "API Keys" },
             { to: "/docs/public-api/subscriptions", label: "Register Customer" },
             { to: "/docs/public-api/notify", label: "Send Notification" },
         ],

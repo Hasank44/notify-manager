@@ -10,6 +10,7 @@ import SearchBar from "../../shared/SearchBar";
 import Pagination from "../../shared/Pagination";
 import ConfirmModal from "../../shared/ConfirmModal";
 import DomainTable from "./DomainTable";
+import ApiKeyManager from "./ApiKeyManager";
 import DomainForm from "./DomainForm";
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from "@/utils/constants";
 
@@ -41,6 +42,7 @@ const Domains = () => {
     const [editTarget, setEditTarget] = useState(null);
     const [deleteTarget, setDeleteTarget] = useState(null);
     const [saving, setSaving] = useState(false);
+    const [keyManagerTarget, setKeyManagerTarget] = useState(null);
     const debouncedSearch = useDebounce(search, 350);
     const queryParams = useMemo(() => {
         const params = { page, limit };
@@ -199,6 +201,7 @@ const Domains = () => {
                     loading={domains.loading}
                     onEdit={openEdit}
                     onDelete={setDeleteTarget}
+                    onManageKeys={setKeyManagerTarget}
                 />
                 <Pagination
                     page={domains.pagination.page}
@@ -226,6 +229,11 @@ const Domains = () => {
                 loading={saving}
                 onConfirm={handleDelete}
                 onCancel={() => setDeleteTarget(null)}
+            />
+            <ApiKeyManager
+                open={!!keyManagerTarget}
+                domain={keyManagerTarget}
+                onClose={() => setKeyManagerTarget(null)}
             />
         </div>
     );

@@ -5,30 +5,31 @@ import axiosInstance, { authStorage } from "@/api/axiosInstance";
 import { setUser } from "@/redux/userSlice";
 import ENDPOINTS from "@/api/endpoints";
 import Navbar from "./components/shared/Navbar";
+import { onAuthExpired } from "@/api/authEvents";
+import { resetAllEntities } from "@/redux/entities";
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = authStorage.getAccessToken();
-    if (!token) return;
+    const unsubscribe = onAuthExpired(() => {
+      dispatch(setUser(null));
+      resetAllEntities(dispatch);
+    });
 
-    let cancelled = false;
     const validate = async () => {
+      const token = authStorage.getAccessToken();
+      if (!token) return;
       try {
         const response = await axiosInstance.get(ENDPOINTS.auth.me);
-        if (!cancelled) dispatch(setUser(response.data));
+        dispatch(setUser(response.data));
       } catch {
-        if (!cancelled) {
-          authStorage.clear();
-          dispatch(setUser(null));
-        }
+        /* Interceptor already handles auth failures via*/
       }
     };
+
     validate();
-    return () => {
-      cancelled = true;
-    };
+    return () => unsubscribe();
   }, [dispatch]);
 
   return (

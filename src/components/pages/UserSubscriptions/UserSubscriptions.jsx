@@ -21,16 +21,13 @@ const UserSubscriptions = () => {
     const user = useSelector((state) => state.user.user);
     const pkg = user?.packageId ?? user?.package ?? null;
     const allowB2C = pkg?.allowB2C === true;
-
     const subscriptions = useEntity(entities.userSubscriptions);
     const domains = useEntity(entities.domains);
-
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(DEFAULT_PAGE_SIZE);
     const [search, setSearch] = useState("");
     const [domainFilter, setDomainFilter] = useState("");
     const [activeFilter, setActiveFilter] = useState("");
-
     const [formOpen, setFormOpen] = useState(false);
     const [editTarget, setEditTarget] = useState(null);
     const [bulkOpen, setBulkOpen] = useState(false);
@@ -57,7 +54,6 @@ const UserSubscriptions = () => {
         return params;
     }, [page, limit, debouncedSearch, domainFilter, activeFilter]);
 
-    /* Cache-aware fetch */
     useEffect(() => {
         if (!allowB2C) return;
         subscriptions.fetchAll(queryParams).catch(() => { });
@@ -112,22 +108,16 @@ const UserSubscriptions = () => {
     const handleBulkUpload = async ({ domainId, botId, subscriptions: rows }) => {
         setSaving(true);
         try {
-            const result = await dispatch(
-                userSubscriptionsThunks.bulkCreate({ domainId, botId, subscriptions: rows })
-            ).unwrap();
-
+            const result = await dispatch(userSubscriptionsThunks.bulkCreate({ domainId, botId, subscriptions: rows })).unwrap();
             const created = result?.created ?? 0;
             const skipped = result?.skipped ?? 0;
             const total = result?.total ?? rows.length;
 
             if (skipped > 0) {
-                toast.warning(
-                    `${created} added, ${skipped} skipped (already exist). Total: ${total}`
-                );
+                toast.warning(`${created} added, ${skipped} skipped (already exist). Total: ${total}`);
             } else {
                 toast.success(`${created} subscriber${created === 1 ? "" : "s"} added`);
             }
-
             setBulkOpen(false);
             subscriptions.refresh(queryParams).catch(() => { });
         } finally {
@@ -151,7 +141,6 @@ const UserSubscriptions = () => {
         }
     };
 
-    /* Feature gate */
     if (!allowB2C) {
         return (
             <div className="space-y-3">
@@ -177,9 +166,7 @@ const UserSubscriptions = () => {
         );
     }
 
-    const domainOptions = (domains.items ?? []).filter(
-        (d) => d.status === "approved"
-    );
+    const domainOptions = (domains.items ?? []).filter((d) => d.status === "approved");
 
     return (
         <div className="space-y-3">
@@ -208,8 +195,6 @@ const UserSubscriptions = () => {
                     </div>
                 }
             />
-
-            {/* Info banner */}
             <div className="flex items-start gap-2 rounded-lg border border-indigo-500/20 bg-indigo-500/5 p-3 text-xs">
                 <FileSpreadsheet
                     size={14}
@@ -224,8 +209,6 @@ const UserSubscriptions = () => {
                     CSV.
                 </p>
             </div>
-
-            {/* Filters */}
             <div className="card">
                 <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
                     <div className="flex-1">
@@ -271,23 +254,21 @@ const UserSubscriptions = () => {
                     </div>
                 </div>
             </div>
-
-            <UserSubscriptionTable
-                items={subscriptions.items}
-                loading={subscriptions.loading}
-                onView={openView}
-                onEdit={openEdit}
-                onDelete={setDeleteTarget}
-            />
-
-            <Pagination
-                page={subscriptions.pagination.page}
-                limit={subscriptions.pagination.limit}
-                total={subscriptions.pagination.total}
-                onPageChange={setPage}
-            />
-
-            {/* Single add/edit */}
+            <div>
+                <UserSubscriptionTable
+                    items={subscriptions.items}
+                    loading={subscriptions.loading}
+                    onView={openView}
+                    onEdit={openEdit}
+                    onDelete={setDeleteTarget}
+                />
+                <Pagination
+                    page={subscriptions.pagination.page}
+                    limit={subscriptions.pagination.limit}
+                    total={subscriptions.pagination.total}
+                    onPageChange={setPage}
+                />
+            </div>
             <UserSubscriptionForm
                 open={formOpen}
                 subscription={editTarget}

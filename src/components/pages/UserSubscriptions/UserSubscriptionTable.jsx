@@ -5,13 +5,7 @@ import StatusBadge from "../../shared/StatusBadge";
 import EmptyState from "../../shared/EmptyState";
 import { formatRelative } from "@/utils/formatDate";
 
-const UserSubscriptionTable = ({
-    items,
-    loading,
-    onView,
-    onEdit,
-    onDelete,
-}) => {
+const UserSubscriptionTable = ({ items, loading, onView, onEdit, onDelete }) => {
     const columns = [
         {
             key: "customer",
@@ -52,7 +46,7 @@ const UserSubscriptionTable = ({
             label: "Bot",
             render: (s) => (
                 <div>
-                    <p className="text-sm text-gray-100">{s.botId?.name ?? "—"}</p>
+                    <p className="text-sm text-gray-100 whitespace-nowrap">{s.botId?.name ?? "—"}</p>
                     <p className="text-[10px] text-muted">
                         {s.botId?.isSystem ? "System" : "Own"}
                     </p>
@@ -77,7 +71,7 @@ const UserSubscriptionTable = ({
             key: "createdAt",
             label: "Since",
             render: (s) => (
-                <span className="text-xs text-muted">
+                <span className="text-xs text-muted whitespace-nowrap">
                     {formatRelative(s.createdAt)}
                 </span>
             ),
@@ -117,7 +111,6 @@ const UserSubscriptionTable = ({
 const ActionMenu = ({ onView, onEdit, onDelete }) => {
     const [open, setOpen] = useState(false);
     const ref = useRef(null);
-
     useEffect(() => {
         const handler = (e) => {
             if (ref.current && !ref.current.contains(e.target)) setOpen(false);
@@ -136,7 +129,6 @@ const ActionMenu = ({ onView, onEdit, onDelete }) => {
             >
                 <MoreVertical size={16} />
             </button>
-
             {open && (
                 <div className="absolute right-0 top-9 z-20 w-40 overflow-hidden rounded-lg border border-white/10 bg-[#0B1220] p-1 shadow-xl">
                     <button
