@@ -43,7 +43,7 @@ const PublicApiSubscriptions = () => {
                                 type: "string",
                                 required: "required",
                                 description:
-                                    "Your domain's API key (starts with sk_live_). Generate from Domains → API Keys.",
+                                    "Your domain's API key (starts with notify_live_). Generate from Domains → API Keys.",
                             },
                             {
                                 name: "Content-Type",
@@ -56,7 +56,7 @@ const PublicApiSubscriptions = () => {
 
                     <Callout variant="info" title="Header alternative">
                         The API also accepts{" "}
-                        <code className="text-xs">Authorization: Bearer sk_live_...</code>{" "}
+                        <code className="text-xs">Authorization: Bearer notify_live_...</code>{" "}
                         as a standard OAuth-style header. Both work identically. Need a
                         key?{" "}
                         <Link
@@ -77,7 +77,7 @@ const PublicApiSubscriptions = () => {
                                 name: "domain",
                                 type: "string",
                                 required: "required",
-                                description: "Your verified domain (e.g., shop.rahim.com)",
+                                description: "Your verified domain (e.g., your-domain.com)",
                             },
                             {
                                 name: "externalUserId",
@@ -150,7 +150,7 @@ const PublicApiSubscriptions = () => {
                         code={`const NOTIFY_API = "https://api-notify-manage.vercel.app/api/v1";
 const API_KEY = process.env.NOTIFY_API_KEY;
 const DOMAIN = "your-domain.com";
-const BOT_ID = "6ad26cc5eb1769945f76543c";
+const BOT_ID = "6ad26cc5eb1769945f76...";
 
 async function registerCustomer(chatId, name) {
   const response = await fetch(\`\${NOTIFY_API}/subscriptions\`, {
@@ -203,7 +203,7 @@ app.post("/telegram/webhook", async (req, res) => {
 function registerCustomer($chatId, $name) {
     $apiKey = getenv("NOTIFY_API_KEY");
     $domain = "your-domain.com";
-    $botId  = "6ad26cc5eb1769945f76543c";
+    $botId  = "6ad26cc5eb1769945f765...";
 
     $payload = [
         "domain"         => $domain,
@@ -255,7 +255,7 @@ import requests
 NOTIFY_API = "https://api-notify-manage.vercel.app/api/v1"
 API_KEY = os.getenv("NOTIFY_API_KEY")
 DOMAIN = "your-domain.com"
-BOT_ID = "6ad26cc5eb1769945f76543c"
+BOT_ID = "6ad26cc5eb1769945f765..."
 
 def register_customer(chat_id, name):
     response = requests.post(
@@ -300,8 +300,8 @@ register_customer(6862958488, "Name")`}
     "domain": "your-domain.com",
     "externalUserId": "tg-6862958488",
     "chatId": "6862958488",
-    "botId": "6ad26cc5eb1769945f76543c",
-    "name": "Hasina"
+    "botId": "6ad26cc5eb1769945f765...",
+    "name": "name"
   }'`}
                     />
                 </section>

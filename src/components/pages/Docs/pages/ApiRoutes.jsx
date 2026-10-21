@@ -51,11 +51,11 @@ const ApiRoutes = () => {
     Authorization: \`Bearer \${accessToken}\`
   },
   body: JSON.stringify({
-    domainId: "6ad3da188a1471489079dd19",
-    notificationTypeId: "6ad2624f05086186aefa620c",
+    domainId: "6ad3da188a14971489079...",
+    notificationTypeId: "6ad2624**f05086186aefa...",
     destinations: [
-      "6ad3df4e7c35f40dec2e4735",
-      "6ad3ff8a7c35f40dec2e4780"
+      "6ad3df4e7c35f40de**c2e4...",
+      "6ad3ff8a7c35f**40dec2e4..."
     ]
   })
 });
@@ -80,11 +80,11 @@ curl_setopt_array($ch, [
         "Authorization: Bearer " . $accessToken
     ],
     CURLOPT_POSTFIELDS => json_encode([
-        "domainId" => "6ad3da188a1471489079dd19",
-        "notificationTypeId" => "6ad2624f05086186aefa620c",
+        "domainId" => "6ad3da188a147148**9079d...",
+        "notificationTypeId" => "6ad2624f05086186a**efa...",
         "destinations" => [
-            "6ad3df4e7c35f40dec2e4735",
-            "6ad3ff8a7c35f40dec2e4780"
+            "6ad3df4e7c35f40dec**2e4...",
+            "6ad3ff8a7c35f40dec**2e4..."
         ]
     ]),
 ]);
@@ -103,11 +103,11 @@ response = requests.post(
     "https://api-notify-manage.vercel.app/api/v1/user/routes",
     headers={"Authorization": f"Bearer {access_token}"},
     json={
-        "domainId": "6ad3da188a1471489079dd19",
-        "notificationTypeId": "6ad2624f05086186aefa620c",
+        "domainId": "6ad3da188a147148**9079d...",
+        "notificationTypeId": "6ad2624f05**086186aefa6...",
         "destinations": [
-            "6ad3df4e7c35f40dec2e4735",
-            "6ad3ff8a7c35f40dec2e4780",
+            "6ad3df4e7c35f40**dec2e4...",
+            "6ad3ff8a7c35f40dec**2e4...",
         ],
     },
 )
@@ -123,11 +123,11 @@ result = response.json()`}
   "message": "Route created successfully",
   "data": {
     "id": "6ad...",
-    "domainId": "6ad3da188a1471489079dd19",
-    "notificationTypeId": "6ad2624f05086186aefa620c",
+    "domainId": "6ad3da188a147148**9079d...",
+    "notificationTypeId": "6ad2624f05**086186aefa6...",
     "destinations": [
-      "6ad3df4e7c35f40dec2e4735",
-      "6ad3ff8a7c35f40dec2e4780"
+        "6ad3df4e7c35f40**dec2e4...",
+        "6ad3ff8a7c35f40dec**2e4...",
     ],
     "status": "approved",
     "verified": true,
@@ -203,7 +203,7 @@ foreach ($result["data"]["items"] as $route) {
 
 response = requests.get(
     "https://api-notify-manage.vercel.app/api/v1/user/routes",
-    params={"domainId": "6ad3da188a1471489079dd19"},
+    params={"domainId": "6ad3da188a1471489079d..."},
     headers={"Authorization": f"Bearer {access_token}"},
 )
 
@@ -236,9 +236,9 @@ for route in result["data"]["items"]:
   },
   body: JSON.stringify({
     destinations: [
-      "6ad3df4e7c35f40dec2e4735",
-      "6ad3ff8a7c35f40dec2e4780",
-      "6ad3aa0b7c35f40dec2e4750"
+      "6ad3df4e7c35f40d***e4735",
+      "6ad3ff8a7c35f40d***e4780",
+      "6ad3aa0b7c35f40d***e4750"
     ],
     active: true
   })

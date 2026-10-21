@@ -26,8 +26,6 @@ const ApiKeys = () => {
                     This way, a leaked development key can't affect your production
                     domain.
                 </Callout>
-
-                {/* Why */}
                 <section>
                     <h2 className="mb-3 text-lg font-semibold text-gray-100">
                         Why API Keys?
@@ -59,8 +57,6 @@ const ApiKeys = () => {
                         </div>
                     </div>
                 </section>
-
-                {/* Generate */}
                 <section>
                     <h2 className="mb-3 text-lg font-semibold text-gray-100">
                         Generating a Key
@@ -95,8 +91,6 @@ const ApiKeys = () => {
                         recover it — you'll need to rotate.
                     </Callout>
                 </section>
-
-                {/* Using the key */}
                 <section>
                     <h2 className="mb-3 text-lg font-semibold text-gray-100">
                         Using the Key
@@ -111,11 +105,11 @@ const ApiKeys = () => {
                         title="cURL"
                         code={`curl -X POST https://api.iftyhasan.com/api/v1/notify \\
   -H "Content-Type: application/json" \\
-  -H "X-API-Key: sk_live_abc123..." \\
+  -H "X-API-Key: notify_live_abc123..." \\
   -d '{
     "type": "custom",
-    "domain": "shop.rahim.com",
-    "data": { "userId": "customer-hasina", "orderId": "ORD-5001" }
+    "domain": "your-domain.com",
+    "data": { "userId": "customer-name", "orderId": "ORD-5001" }
   }'`}
                     />
 
@@ -123,8 +117,8 @@ const ApiKeys = () => {
                         language="js"
                         title="JavaScript — environment variable (recommended)"
                         code={`// .env
-// NOTIFY_API_KEY=sk_live_abc123...
-// NOTIFY_DOMAIN=shop.rahim.com
+// NOTIFY_API_KEY=notify_live_abc123...
+// NOTIFY_DOMAIN=your-domain.com
 
 const API_KEY = process.env.NOTIFY_API_KEY;
 const DOMAIN = process.env.NOTIFY_DOMAIN;
@@ -133,12 +127,12 @@ await fetch("https://api.iftyhasan.com/api/v1/notify", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
-    "X-API-Key": API_KEY
+    "X-API-Key": NOTIFY_API_KEY
   },
   body: JSON.stringify({
     type: "custom",
     domain: DOMAIN,
-    data: { userId: "customer-hasina", orderId: "ORD-5001" }
+    data: { userId: "customer-name", orderId: "ORD-5001" }
   })
 });`}
                     />
@@ -162,7 +156,7 @@ curl_setopt_array($ch, [
     CURLOPT_POSTFIELDS => json_encode([
         "type" => "custom",
         "domain" => $domain,
-        "data" => ["userId" => "customer-hasina", "orderId" => "ORD-5001"]
+        "data" => ["userId" => "customer-name", "orderId" => "ORD-5001"]
     ]),
 ]);
 
@@ -185,13 +179,11 @@ response = requests.post(
     json={
         "type": "custom",
         "domain": DOMAIN,
-        "data": {"userId": "customer-hasina", "orderId": "ORD-5001"},
+        "data": {"userId": "customer-name", "orderId": "ORD-5001"},
     },
 )`}
                     />
                 </section>
-
-                {/* Rotation */}
                 <section>
                     <h2 className="mb-3 text-lg font-semibold text-gray-100">
                         Rotating a Key
@@ -216,8 +208,6 @@ response = requests.post(
                         deploy the new key.
                     </Callout>
                 </section>
-
-                {/* Revoking */}
                 <section>
                     <h2 className="mb-3 text-lg font-semibold text-gray-100">
                         Revoking a Key
@@ -228,8 +218,6 @@ response = requests.post(
                         longer needed.
                     </p>
                 </section>
-
-                {/* Best practices */}
                 <section>
                     <h2 className="mb-3 text-lg font-semibold text-gray-100">
                         Best Practices
@@ -266,8 +254,6 @@ response = requests.post(
                         </li>
                     </ul>
                 </section>
-
-                {/* Errors */}
                 <section>
                     <h2 className="mb-3 text-lg font-semibold text-gray-100">
                         Common Errors

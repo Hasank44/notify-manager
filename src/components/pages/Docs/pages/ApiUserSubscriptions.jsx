@@ -69,11 +69,11 @@ const ApiUserSubscriptions = () => {
       Authorization: \`Bearer \${accessToken}\`
     },
     body: JSON.stringify({
-      domainId: "6ad3da188a1471489079dd19",
+      domainId: "6ad3da188a1471489079d...",
       botId: "6ad26cc5eb1769945f765...",
-      externalUserId: "customer-hasan",
+      externalUserId: "customer-name",
       chatId: "6862958488",
-      name: "hasan",
+      name: "name",
       email: "mdhasan.sjb@gmail.com"
     })
   }
@@ -95,11 +95,11 @@ curl_setopt_array($ch, [
         "Authorization: Bearer " . $accessToken
     ],
     CURLOPT_POSTFIELDS => json_encode([
-        "domainId" => "6ad3da188a1471489079dd19",
+        "domainId" => "6ad3da188a1471489079...",
         "botId" => "6ad26cc5eb1769945f765...",
-        "externalUserId" => "customer-hasan",
+        "externalUserId" => "customer-name",
         "chatId" => "6862958488",
-        "name" => "hasan",
+        "name" => "name",
         "email" => "mdhasan.sjb@gmail.com"
     ]),
 ]);
@@ -116,11 +116,11 @@ response = requests.post(
     "https://api-notify-manage.vercel.app/api/v1/user/user-subscriptions",
     headers={"Authorization": f"Bearer {access_token}"},
     json={
-        "domainId": "6ad3da188a1471489079dd19",
+        "domainId": "6ad3da188a1471489079d...",
         "botId": "6ad26cc5eb1769945f765...",
-        "externalUserId": "customer-hasan",
+        "externalUserId": "customer-name",
         "chatId": "6862958488",
-        "name": "hasan",
+        "name": "name",
         "email": "mdhasan.sjb@gmail.com",
     },
 )
@@ -135,9 +135,9 @@ result = response.json()`}
   "message": "Subscription created",
   "data": {
     "id": "6ad...",
-    "externalUserId": "customer-hasan",
+    "externalUserId": "customer-name",
     "chatId": "6862958488",
-    "name": "hasan",
+    "name": "name",
     "active": true,
     "totalReceived": 0
   }
@@ -180,7 +180,7 @@ result = response.json()`}
       Authorization: \`Bearer \${accessToken}\`
     },
     body: JSON.stringify({
-      domainId: "6ad3da188a1471489079dd19",
+      domainId: "6ad3da188a1471489079d...",
       botId: "6ad26cc5eb1769945f765...",
       subscriptions: [
         { externalUserId: "customer-1", chatId: "1111111111", name: "Customer 1" },
@@ -210,7 +210,7 @@ curl_setopt_array($ch, [
         "Authorization: Bearer " . $accessToken
     ],
     CURLOPT_POSTFIELDS => json_encode([
-        "domainId" => "6ad3da188a1471489079dd19",
+        "domainId" => "6ad3da188a1471489079d...",
         "botId" => "6ad26cc5eb1769945f765...",
         "subscriptions" => [
             ["externalUserId" => "customer-1", "chatId" => "1111111111"],
@@ -233,7 +233,7 @@ response = requests.post(
     "https://api-notify-manage.vercel.app/api/v1/user/user-subscriptions/bulk",
     headers={"Authorization": f"Bearer {access_token}"},
     json={
-        "domainId": "6ad3da188a1471489079dd19",
+        "domainId": "6ad3da188a1471489079d...",
         "botId": "6ad26cc5eb1769945f765...",
         "subscriptions": [
             {"externalUserId": "customer-1", "chatId": "1111111111"},
@@ -334,9 +334,9 @@ for customer in result["data"]["items"]:
     "items": [
       {
         "id": "6ad...",
-        "externalUserId": "customer-hasan",
+        "externalUserId": "customer-name",
         "chatId": "6862958488",
-        "name": "hasan",
+        "name": "name",
         "domainId": { "domain": "your-domain.com" },
         "botId": { "name": "your's Shop Bot" },
         "active": true,
