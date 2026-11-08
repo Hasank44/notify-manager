@@ -129,7 +129,7 @@ const Notifications = () => {
             key: "requestId",
             label: "Request ID",
             render: (n) => (
-                <code className="rounded bg-white/5 px-1.5 py-0.5 text-[11px] text-indigo-300">
+                <code className="rounded whitespace-nowrap bg-white/5 px-1.5 py-0.5 text-[11px] text-indigo-300">
                     {n.requestId}
                 </code>
             ),

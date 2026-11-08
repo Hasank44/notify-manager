@@ -56,7 +56,7 @@ const DataTable = ({
                                 className={onRowClick ? "cursor-pointer" : ""}
                             >
                                 {columns.map((col) => (
-                                    <td key={col.key} className={col.className ?? ""}>
+                                    <td key={col.key} className={col.className ?? "whitespace-nowrap"}>
                                         {col.render ? col.render(row, index) : row[col.key] ?? "—"}
                                     </td>
                                 ))}
